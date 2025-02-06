@@ -1,0 +1,4 @@
+repository "OroMove 2025-02-06_12-57-44/oromove-ui@18968240055088@cloud"
+  path "/"
+    br "/main"
+    co "/main"
