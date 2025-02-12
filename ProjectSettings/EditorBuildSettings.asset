@@ -5,9 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/SplashScreen.unity
+    guid: f000fd2f6a6349d4b94b5c6f3f99295b
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/HomePage.unity
+    guid: 626b1c9e6912f4a42894e575bcfbc172
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/GameLibPage.unity
+    guid: 39bff18ac4f1d244bbd0c9d6a0772e58
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/HillClimberPage.unity
+    guid: 81dfdc41cf27bd743953c0650619636c
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OroDodgePage.unity
+    guid: bdaa6fe28b56e9e4ab8c22ed1df7b93d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
