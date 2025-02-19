@@ -400,7 +400,10 @@ PlayerSettings:
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding: []
-  m_BuildTargetDefaultTextureCompressionFormat: []
+  m_BuildTargetDefaultTextureCompressionFormat:
+  - serializedVersion: 3
+    m_BuildTarget: Android
+    m_Formats: 01000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -779,11 +782,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: ac8af1cd-71d6-40fb-b95c-11744e1381a0
+  cloudProjectId: 2c2a1817-bbaf-4369-aeaa-84c92eb1b0ac
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: OroMove 2025-02-06_12-57-44
-  organizationId: senab_roshan
+  projectName: Authentication
+  organizationId: unity_11cfb6771634bc9ef231
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -12,7 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/App_Pages/SplashScreen.unity
     guid: f000fd2f6a6349d4b94b5c6f3f99295b
   - enabled: 1
-    path: Assets/Scenes/App_Pages/HomePage.unity
+    path: Assets/Scenes/App_Pages/SignInPage.unity
+    guid: c5cd445a4c4094a4d8debdd9f036861c
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/PatientHomePage.unity
     guid: 626b1c9e6912f4a42894e575bcfbc172
   - enabled: 1
     path: Assets/Scenes/App_Pages/GameLibPage.unity
@@ -23,6 +26,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/App_Pages/OroDodgePage.unity
     guid: bdaa6fe28b56e9e4ab8c22ed1df7b93d
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/ResetPasswordPage.unity
+    guid: d0250ada8e6e7364f984d0ec0a0c0ec9
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/WhoAreYouPage.unity
+    guid: 4b2a2f43915a7d44d97b9e8ee769670c
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/SignUpPage.unity
+    guid: c1b8cc3fb037aaf41a5d39d1d3fff8e0
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistProfileCreationPage.unity
+    guid: 4fc93f508e5953a45ac8bd1265c5f633
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/PatientProfileCreationPage.unity
+    guid: 042cc6a4ec2de104895bd9843bcdcd4d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

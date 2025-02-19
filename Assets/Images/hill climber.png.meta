@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hill climber_0: -7297540662581785272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

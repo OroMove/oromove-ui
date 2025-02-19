@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashScreenDuration: 3
-  nextSceneName: HomePage
+  nextSceneName: SignInPage
   fadePanel: {fileID: 1435765569}
   fadeDuration: 1
 --- !u!1 &1435765567
