@@ -18,9 +18,46 @@ MonoBehaviour:
   m_PlatformId: b9b35072a6f44c2e863f17467ea3dc13
   m_PlatformBuildProfile:
     rid: 7408799991501946952
-  m_OverrideGlobalSceneList: 0
-  m_Scenes: []
-  m_ScriptingDefines: []
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/SplashScreen.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/WhoAreYouPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/SignUpPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/SignInPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/ResetPasswordPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/PatientProfileCreationPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/TherapistProfileCreationPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/PatientHomePage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/OroDodgePage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/GameLibPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HillClimberPage.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC -  Game Menu.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC - Level 1.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC - Level 2.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC - Level 3.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC - Level 4.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC - Level 5.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/App_Pages/HC - Level 6.unity
+  m_ScriptingDefines:
+  - 
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
