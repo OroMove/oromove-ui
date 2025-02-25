@@ -75,20 +75,25 @@ public class TherapistProfileCreationController : MonoBehaviour
     async Task SaveTherapistProfile(string fullName, string designation, string practiceLocation, string specialization, string experience, string contactNumber, string email)
     {
         string playerId = AuthenticationService.Instance.PlayerId;
+        var profileData = new Dictionary<string, object>
+        {
+            { "fullName", fullName },
+            { "designation", designation },
+            { "practiceLocation", practiceLocation },
+            { "specialization", specialization },
+            { "experience", experience },
+            { "contactNumber", contactNumber },
+            { "email", email }
+        };
 
         var data = new Dictionary<string, object>
         {
-            { $"{playerId}_fullName", fullName },
-            { $"{playerId}_designation", designation },
-            { $"{playerId}_practiceLocation", practiceLocation },
-            { $"{playerId}_specialization", specialization },
-            { $"{playerId}_experience", experience },
-            { $"{playerId}_contactNumber", contactNumber },
-            { $"{playerId}_email", email }
+            { $"{playerId}_therpaistDetails", profileData } 
         };
 
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
     }
+
 
     bool IsValidProfile(string fullName, string designation, string practiceLocation, string specialization, string experience, string contactNumber, string email)
     {

@@ -12,17 +12,18 @@ public class PatientProfileCreationController : MonoBehaviour
 {
     // PERSONAL INFO
     public TMP_InputField fullNameInput;
-    public TMP_InputField dobInput; 
+    public TMP_InputField dobInput;
     public TMP_Dropdown genderDropdown;
     public TMP_InputField contactNumberInput;
     public TMP_InputField emailInput;
 
     // MEDICAL INFO
     public TMP_InputField diagnosisInput;
-    public TMP_InputField therapyStartDateInput; 
-    public TMP_InputField therapyNameInput;
+    public TMP_InputField therapyStartDateInput;
+    public TMP_InputField therapistNameInput; 
+    public TMP_Dropdown causeOfImpairmentDropdown; 
     public Slider severityLevelSlider;
-    public TextMeshProUGUI severityValueText; 
+    public TextMeshProUGUI severityValueText;
 
     // CAREGIVER DETAILS
     public TMP_InputField caregiverFullNameInput;
@@ -33,7 +34,9 @@ public class PatientProfileCreationController : MonoBehaviour
 
     public Button backButton;
     public Button doneButton;
-    public TextMeshProUGUI errorText; 
+    public TextMeshProUGUI errorText;
+
+    private bool unsavedChanges = false;
 
     void Start()
     {
@@ -44,17 +47,37 @@ public class PatientProfileCreationController : MonoBehaviour
         genderDropdown.ClearOptions();
         genderDropdown.AddOptions(new List<string> { "Select Gender", "Male", "Female", "Other" });
 
+        // Populate cause of impairment dropdown
+        causeOfImpairmentDropdown.ClearOptions();
+        causeOfImpairmentDropdown.AddOptions(new List<string>
+        {
+            "Select Cause", "Stroke", "Brain Injury", "Neurological Disorder", "Cerebral Palsy", "Other"
+        });
+
+        UpdateSeverityText(severityLevelSlider.value);
+        severityLevelSlider.onValueChanged.AddListener(UpdateSeverityText);
+
+        fullNameInput.onValueChanged.AddListener(delegate { unsavedChanges = true; ValidateName(fullNameInput.text); });
+        emailInput.onValueChanged.AddListener(delegate { unsavedChanges = true; ValidateEmail(emailInput.text); });
+
         severityValueText.text = severityLevelSlider.value.ToString("0.0");
         severityLevelSlider.onValueChanged.AddListener(UpdateSeverityText);
     }
 
     void UpdateSeverityText(float value)
     {
-        severityValueText.text = value.ToString("0.0");
+        string[] severityLabels = { "Mild", "Moderate", "Severe" };
+        int index = Mathf.Clamp((int)value, 0, severityLabels.Length - 1);
+        severityValueText.text = severityLabels[index];
     }
 
     void OnBackButtonClicked()
     {
+        if (unsavedChanges)
+        {
+            Debug.Log("Are you sure you want to go back? Unsaved changes will be lost.");
+            return; 
+        }
         SceneManager.LoadScene("SignUpPage");
     }
 
@@ -68,7 +91,8 @@ public class PatientProfileCreationController : MonoBehaviour
 
         string diagnosis = diagnosisInput.text.Trim();
         string therapyStartDate = therapyStartDateInput.text.Trim();
-        string therapyName = therapyNameInput.text.Trim();
+        string therapistName = therapistNameInput.text.Trim(); 
+        string causeOfImpairment = causeOfImpairmentDropdown.options[causeOfImpairmentDropdown.value].text; 
         float severityLevel = severityLevelSlider.value;
 
         string caregiverFullName = caregiverFullNameInput.text.Trim();
@@ -77,13 +101,13 @@ public class PatientProfileCreationController : MonoBehaviour
         string caregiverContactNumber = caregiverContactNumberInput.text.Trim();
         string caregiverEmail = caregiverEmailInput.text.Trim();
 
-        if (IsValidProfile(fullName, dob, gender, contactNumber, email, diagnosis, therapyStartDate, therapyName, caregiverFullName, caregiverRelation, caregiverOccupation, caregiverContactNumber, caregiverEmail))
+        if (IsValidProfile(fullName, dob, gender, contactNumber, email, diagnosis, therapyStartDate, therapistName, causeOfImpairment, caregiverFullName, caregiverRelation, caregiverOccupation, caregiverContactNumber, caregiverEmail))
         {
             Debug.Log("Saving Patient Profile...");
 
             try
             {
-                await SavePatientProfile(fullName, dob, gender, contactNumber, email, diagnosis, therapyStartDate, therapyName, severityLevel, caregiverFullName, caregiverRelation, caregiverOccupation, caregiverContactNumber, caregiverEmail);
+                await SavePatientProfile(fullName, dob, gender, contactNumber, email, diagnosis, therapyStartDate, therapistName, causeOfImpairment, severityLevel, caregiverFullName, caregiverRelation, caregiverOccupation, caregiverContactNumber, caregiverEmail);
                 Debug.Log("Patient Profile Created Successfully!");
                 SceneManager.LoadScene("PatientHomePage");
             }
@@ -95,112 +119,82 @@ public class PatientProfileCreationController : MonoBehaviour
         }
     }
 
-    async Task SavePatientProfile(string fullName, string dob, string gender, string contactNumber, string email, string diagnosis, string therapyStartDate, string therapyName, float severityLevel, string caregiverFullName, string caregiverRelation, string caregiverOccupation, string caregiverContactNumber, string caregiverEmail)
+    async Task SavePatientProfile(string fullName, string dob, string gender, string contactNumber, string email,
+     string diagnosis, string therapyStartDate, string therapistName, string causeOfImpairment, float severityLevel,
+     string caregiverFullName, string caregiverRelation, string caregiverOccupation, string caregiverContactNumber, string caregiverEmail)
     {
         string playerId = AuthenticationService.Instance.PlayerId;
 
+        var profileData = new Dictionary<string, object>
+        {
+            { "fullName", fullName },
+            { "dob", dob },
+            { "gender", gender },
+            { "contactNumber", contactNumber },
+            { "email", email },
+            { "diagnosis", diagnosis },
+            { "therapyStartDate", therapyStartDate },
+            { "therapistName", therapistName },
+            { "causeOfImpairment", causeOfImpairment },
+            { "severityLevel", severityLevel },
+            { "caregiverFullName", caregiverFullName },
+            { "caregiverRelation", caregiverRelation },
+            { "caregiverOccupation", caregiverOccupation },
+            { "caregiverContactNumber", caregiverContactNumber },
+            { "caregiverEmail", caregiverEmail }
+        };
+
         var data = new Dictionary<string, object>
         {
-            { $"{playerId}_fullName", fullName },
-            { $"{playerId}_dob", dob },
-            { $"{playerId}_gender", gender },
-            { $"{playerId}_contactNumber", contactNumber },
-            { $"{playerId}_email", email },
-            { $"{playerId}_diagnosis", diagnosis },
-            { $"{playerId}_therapyStartDate", therapyStartDate },
-            { $"{playerId}_therapyName", therapyName },
-            { $"{playerId}_severityLevel", severityLevel },
-            { $"{playerId}_caregiverFullName", caregiverFullName },
-            { $"{playerId}_caregiverRelation", caregiverRelation },
-            { $"{playerId}_caregiverOccupation", caregiverOccupation },
-            { $"{playerId}_caregiverContactNumber", caregiverContactNumber },
-            { $"{playerId}_caregiverEmail", caregiverEmail }
+            { $"{playerId}_PatientDetails", profileData }
         };
 
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
     }
 
-    bool IsValidProfile(string fullName, string dob, string gender, string contactNumber, string email, string diagnosis, string therapyStartDate, string therapyName, string caregiverFullName, string caregiverRelation, string caregiverOccupation, string caregiverContactNumber, string caregiverEmail)
+
+    bool IsValidProfile(string fullName, string dob, string gender, string contactNumber, string email, string diagnosis, string therapyStartDate, string therapistName, string causeOfImpairment, string caregiverFullName, string caregiverRelation, string caregiverOccupation, string caregiverContactNumber, string caregiverEmail)
     {
-        if (string.IsNullOrEmpty(fullName) || !Regex.IsMatch(fullName, "^[a-zA-Z ]+$"))
-        {
-            errorText.text = "Invalid Name. Only letters and spaces allowed.";
-            return false;
-        }
+        if (!ValidateName(fullName)) return false;
+        if (string.IsNullOrEmpty(dob)) return ShowError("Date of Birth cannot be empty.");
+        if (genderDropdown.value == 0) return ShowError("Please select a gender.");
+        if (!ValidateContactNumber(contactNumber)) return false;
+        if (!ValidateEmail(email)) return false;
+        if (string.IsNullOrEmpty(diagnosis)) return ShowError("Diagnosis cannot be empty.");
+        if (string.IsNullOrEmpty(therapyStartDate)) return ShowError("Therapy Start Date cannot be empty.");
+        if (string.IsNullOrEmpty(therapistName)) return ShowError("Therapist Name cannot be empty.");
+        if (causeOfImpairmentDropdown.value == 0) return ShowError("Please select a valid cause of impairment.");
+        if (!ValidateName(caregiverFullName)) return false;
+        if (string.IsNullOrEmpty(caregiverRelation)) return ShowError("Relation to Patient cannot be empty.");
+        if (string.IsNullOrEmpty(caregiverOccupation)) return ShowError("Caregiver Occupation cannot be empty.");
+        if (!ValidateContactNumber(caregiverContactNumber)) return false;
+        if (!ValidateEmail(caregiverEmail)) return false;
 
-        if (string.IsNullOrEmpty(dob))
-        {
-            errorText.text = "Date of Birth cannot be empty.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(gender) || gender == "Select Gender")
-        {
-            errorText.text = "Gender must be selected.";
-            return false;
-        }
-
-        if (!Regex.IsMatch(contactNumber, @"^\d{10,15}$"))
-        {
-            errorText.text = "Invalid Contact Number. It should be 10-15 digits long.";
-            return false;
-        }
-
-        if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-        {
-            errorText.text = "Invalid Email Format.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(diagnosis))
-        {
-            errorText.text = "Diagnosis cannot be empty.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(therapyStartDate))
-        {
-            errorText.text = "Therapy Start Date cannot be empty.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(therapyName))
-        {
-            errorText.text = "Therapy Name cannot be empty.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(caregiverFullName) || !Regex.IsMatch(caregiverFullName, "^[a-zA-Z ]+$"))
-        {
-            errorText.text = "Invalid Caregiver Name. Only letters and spaces allowed.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(caregiverRelation))
-        {
-            errorText.text = "Relation to Patient cannot be empty.";
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(caregiverOccupation))
-        {
-            errorText.text = "Caregiver Occupation cannot be empty.";
-            return false;
-        }
-
-        if (!Regex.IsMatch(caregiverContactNumber, @"^\d{10,15}$"))
-        {
-            errorText.text = "Invalid Caregiver Contact Number. It should be 10-15 digits long.";
-            return false;
-        }
-
-        if (!Regex.IsMatch(caregiverEmail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-        {
-            errorText.text = "Invalid Caregiver Email Format.";
-            return false;
-        }
-
-        errorText.text = ""; 
+        errorText.text = "";
         return true;
+
+    }
+    bool ValidateName(string name)
+    {
+        if (!Regex.IsMatch(name, "^[a-zA-Z ]+$")) return ShowError("Invalid Name. Only letters and spaces allowed.");
+        return true;
+    }
+
+    bool ValidateContactNumber(string number)
+    {
+        if (!Regex.IsMatch(number, @"^\d{10,15}$")) return ShowError("Invalid Contact Number. It should be 10-15 digits long.");
+        return true;
+    }
+
+    bool ValidateEmail(string email)
+    {
+        if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$")) return ShowError("Invalid Email Format.");
+        return true;
+    }
+
+    bool ShowError(string message)
+    {
+        errorText.text = message;
+        return false;
     }
 }
