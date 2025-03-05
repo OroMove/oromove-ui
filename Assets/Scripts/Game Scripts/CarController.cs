@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI; // For UI components like Image and Text
 using System.Collections.Generic; // For storing distances and speeds in lists
+using System.Threading.Tasks; // For the ContinueWith method
+using UnityEngine.SceneManagement; // For accessing the scene name
 
 public class CarController : MonoBehaviour
 {
@@ -34,6 +36,29 @@ public class CarController : MonoBehaviour
         if (other.gameObject == finishFlag) // When colliding with the finish line
         {
             FindObjectOfType<GameManager>().LevelComplete(); // Trigger level completion
+
+            // Add the level unlocking code here
+            string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            if (int.TryParse(currentSceneName.Replace("HC - Level ", ""), out int currentLevelNumber))
+            {
+                Debug.Log($"[CarController] Unlocking next level after completing level {currentLevelNumber}");
+
+                // Call LevelMenu's static method to unlock the next level
+                LevelMenu.UnlockNextLevel(currentLevelNumber).ContinueWith(task => {
+                    if (task.Exception != null)
+                    {
+                        Debug.LogError($"[CarController] Error unlocking next level: {task.Exception.Message}");
+                    }
+                    else
+                    {
+                        Debug.Log($"[CarController] Successfully unlocked level {currentLevelNumber + 1}");
+                    }
+                });
+            }
+            else
+            {
+                Debug.LogError("[CarController] Could not parse level number from scene name: " + currentSceneName);
+            }
         }
     }
 
@@ -70,7 +95,7 @@ public class CarController : MonoBehaviour
             mouthOpeningDistances.Add(mouthOpeningDistance);
             speeds.Add(speedOfCar);
 
-            speedText.text = "Speed: " + Mathf.Round(speedOfCar).ToString();
+            speedText.text = "Speed: " + Mathf.Round(speedOfCar).ToString() + "m/s";
 
             float adjustedTorque = speedOfCar * Time.fixedDeltaTime;
             rearWheel.AddTorque(-adjustedTorque);
@@ -93,7 +118,7 @@ public class CarController : MonoBehaviour
 
             // Update UI with actual speed
             float currentSpeed = rearWheel.linearVelocity.magnitude * 10f; // Scale for readability
-            speedText.text = "Speed: " + Mathf.Round(currentSpeed).ToString();
+            speedText.text = "Speed: " + Mathf.Round(currentSpeed).ToString() + "m/s";
         }
     }
 
@@ -117,3 +142,5 @@ public class CarController : MonoBehaviour
         mouthOpeningDistance = distance;
     }
 }
+
+
