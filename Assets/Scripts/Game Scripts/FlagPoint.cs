@@ -19,23 +19,32 @@ public class FinishPoint : MonoBehaviour
         nextLevelButton.onClick.AddListener(LoadNextLevel);
     }
 
-    private async void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !levelCompletionProcessed)
         {
             levelCompletionProcessed = true; // Prevent multiple triggers
             Debug.Log("[FinishPoint] Player reached finish line!");
 
+            // Get the GameManager
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.LevelComplete(); // This will show the panel and update stats
+            }
+
             string currentSceneName = SceneManager.GetActiveScene().name;
-            if (int.TryParse(currentSceneName.Replace("HC - Level ", ""), out int currentLevelNumber)) // Updated format
+            if (int.TryParse(currentSceneName.Replace("HC - Level ", ""), out int currentLevelNumber))
             {
                 Debug.Log($"[FinishPoint] Current level number: {currentLevelNumber}");
 
-                // Show completion panel
-                levelCompletePanel.SetActive(true);
-
-                // Directly handle level unlocking here for more control
-                await UnlockNextLevelDirectly(currentLevelNumber);
+                // Call the LevelMenu's static method to unlock next level
+                LevelMenu.UnlockNextLevel(currentLevelNumber).ContinueWith(task => {
+                    if (task.Exception != null)
+                    {
+                        Debug.LogError($"[FinishPoint] Error unlocking next level: {task.Exception.Message}");
+                    }
+                });
             }
             else
             {
