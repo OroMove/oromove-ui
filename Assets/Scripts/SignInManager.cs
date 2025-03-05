@@ -86,16 +86,24 @@ public class SignInController : MonoBehaviour
             // Proceed to Home Page after successful login
             await RedirectUserBasedOnRole();
         }
-        catch (AuthenticationException ex)
-        {
-            Debug.LogError("Authentication Error: " + ex.Message);
-            ShowErrorMessage("Incorrect email or password. Please try again.");
-        }
         catch (RequestFailedException ex)
         {
             Debug.LogError("Request Failed: " + ex.Message);
-            ShowErrorMessage("Sign-in failed. Check your connection and try again.");
+
+            if (ex.Message.Contains("WRONG_USERNAME_PASSWORD"))
+            {
+                ShowErrorMessage("Incorrect email or password. Please try again.");
+            }
+            else if (ex.Message.Contains("account not found"))
+            {
+                ShowErrorMessage("Email not registered. Please sign up.");
+            }
+            else
+            {
+                ShowErrorMessage("Sign-in failed. Check your connection and try again.");
+            }
         }
+        
         catch (System.Exception ex)
         {
             Debug.LogError("Unexpected Error: " + ex.Message);
@@ -113,8 +121,6 @@ public class SignInController : MonoBehaviour
             ISet<string> keys = new HashSet<string> { "role" };
             var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
 
-            Debug.Log("Cloud Save Data: " + (data != null ? "Data found" : "No data found"));
-
             if (data.TryGetValue("role", out var roleData))
             {
                 string role = roleData.Value.GetAsString();
@@ -130,12 +136,12 @@ public class SignInController : MonoBehaviour
                 }
                 else
                 {
-                    ShowErrorMessage("Role not found. Contact support.");
+                    ShowErrorMessage("No account found. Please sign up.");
                 }
             }
             else
             {
-                ShowErrorMessage("No role assigned. Please contact support.");
+                ShowErrorMessage("No account found. Please sign up.");
             }
         }
         catch (System.Exception ex)
@@ -144,6 +150,8 @@ public class SignInController : MonoBehaviour
             ShowErrorMessage("Failed to retrieve user data. Try again later.");
         }
     }
+
+
 
 
 
