@@ -11724,8 +11724,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 8107966646386545253, guid: f4c5346b20caee54da9280d0ac736d4b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -14213,9 +14213,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullNameInput: {fileID: 1101664142}
   dobInput: {fileID: 1759787579}
-  genderDropdown: {fileID: 1032607023}
   contactNumberInput: {fileID: 1141620364}
   emailInput: {fileID: 1296748183}
+  genderDropdown: {fileID: 1032607023}
   diagnosisInput: {fileID: 824787536}
   therapyStartDateInput: {fileID: 116975432}
   therapistNameInput: {fileID: 1783441846}
@@ -17514,7 +17514,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1702387333}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
