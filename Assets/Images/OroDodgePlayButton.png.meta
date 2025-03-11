@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OroDodgePlayButton_0: -4552550315858725851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
