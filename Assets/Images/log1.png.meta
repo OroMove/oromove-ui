@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: afe96cc8261cfad428b7ecf8bf45725c
+guid: 647baa3f48fe0bb4d9fab84e0ac866ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7000665841360717728
-    second: OroDodgeMenuOption_0
+      213: -3934403920212854537
+    second: log1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OroDodgeMenuOption_0
+      name: log1_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 748
-        height: 408
+        x: 101
+        y: 91
+        width: 298
+        height: 318
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a74489dd7c572160800000000000000
-      internalID: 7000665841360717728
+      spriteID: 7f8feccda703669c0800000000000000
+      internalID: -3934403920212854537
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OroDodgeMenuOption_0: 7000665841360717728
+      log1_0: -3934403920212854537
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

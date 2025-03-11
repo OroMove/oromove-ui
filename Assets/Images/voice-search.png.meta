@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: afe96cc8261cfad428b7ecf8bf45725c
+guid: a517a3d8141ce42449e9d3c49562490f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7000665841360717728
-    second: OroDodgeMenuOption_0
+      213: 7537149696340297939
+    second: voice-search_0
+  - first:
+      213: 8749059288182402332
+    second: voice-search_1
+  - first:
+      213: 8908519371538961603
+    second: voice-search_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OroDodgeMenuOption_0
+      name: voice-search_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 748
-        height: 408
+        x: 30
+        y: 315
+        width: 32
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +134,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a74489dd7c572160800000000000000
-      internalID: 7000665841360717728
+      spriteID: 3d88e4d17b5599860800000000000000
+      internalID: 7537149696340297939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: voice-search_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 332
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1da1fe6117ea6970800000000000000
+      internalID: 8749059288182402332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: voice-search_2
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 315
+        width: 32
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c414474b2b61ab70800000000000000
+      internalID: 8908519371538961603
       vertices: []
       indices: 
       edges: []
@@ -148,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OroDodgeMenuOption_0: 7000665841360717728
+      voice-search_0: 7537149696340297939
+      voice-search_1: 8749059288182402332
+      voice-search_2: 8908519371538961603
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
