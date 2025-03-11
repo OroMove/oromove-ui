@@ -8,16 +8,16 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed;
     private Rigidbody2D rb;
-    private GameManager gameManager;
+    private ODGameManager gameManager;
     private string lipPosition = "CENTER";
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gameManager = FindObjectOfType<GameManager>(); // Get GameManager reference
+        gameManager = FindObjectOfType<ODGameManager>(); // Get GameManager reference
 
         // Subscribe to FaceLandmarkerRunner event
-        FaceLandmarkerRunner.OnLipPositionChanged += UpdateLipPosition;
+        FaceLandmarkerRunnerLip.OnLipPositionChanged += UpdateLipPosition;
     }
 
     void Update()
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        FaceLandmarkerRunner.OnLipPositionChanged -= UpdateLipPosition;
+        FaceLandmarkerRunnerLip.OnLipPositionChanged -= UpdateLipPosition;
     }
 
 

@@ -3,18 +3,18 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     private bool scored = false;
-    private GameManager gameManager;
+    private ODGameManager gameManager;
 
     void Start()
     {
         // Find the GameManager in the scene if it's not assigned
         if (gameManager == null)
         {
-            gameManager = FindObjectOfType<GameManager>();
+            gameManager = FindObjectOfType<ODGameManager>();
         }
     }
 
-    public void SetGameManager(GameManager manager)
+    public void SetGameManager(ODGameManager manager)
     {
         gameManager = manager;
     }

@@ -13,7 +13,7 @@ using System;
 
 namespace Mediapipe.Unity.Sample.FaceLandmarkDetection
 {
-    public class FaceLandmarkerRunner : VisionTaskApiRunner<FaceLandmarker>
+    public class FaceLandmarkerRunnerLip : VisionTaskApiRunner<FaceLandmarker>
     {
         [SerializeField] private FaceLandmarkerResultAnnotationController _faceLandmarkerResultAnnotationController;
 

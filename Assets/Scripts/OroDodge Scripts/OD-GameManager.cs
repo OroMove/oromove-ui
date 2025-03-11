@@ -8,7 +8,7 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using System.Threading.Tasks;
 
-public class GameManager : MonoBehaviour
+public class ODGameManager : MonoBehaviour
 {
     public GameObject block; // Prefab for the blocks to spawn
     public float maxX; // Maximum X position for spawning blocks
