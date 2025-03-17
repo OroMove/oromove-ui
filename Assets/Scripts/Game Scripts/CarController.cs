@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI; // For UI components like Image and Text
-using System.Collections.Generic; // For storing distances and speeds in lists
-using System.Threading.Tasks; // For the ContinueWith method
-using UnityEngine.SceneManagement; // For accessing the scene name
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class CarController : MonoBehaviour
 {
@@ -31,10 +31,13 @@ public class CarController : MonoBehaviour
     public Text speedText; // Text component to display speed
     public GameObject finishFlag; // Reference to the finish line flag
 
+    private bool isGameOver = false; // Flag to check if the game is over
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == finishFlag) // When colliding with the finish line
         {
+            isGameOver = true; // Stop processing MediaPipe data
             FindObjectOfType<GameManager>().LevelComplete(); // Trigger level completion
 
             // Add the level unlocking code here
@@ -70,7 +73,7 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (fuelLevel > 0)
+        if (fuelLevel > 0 && !isGameOver) // Only process movement if the game is not over
         {
             MouthDetectionMovement();
         }
@@ -139,8 +142,9 @@ public class CarController : MonoBehaviour
 
     public void SetMouthOpeningDistance(float distance)
     {
-        mouthOpeningDistance = distance;
+        if (!isGameOver) // Only update mouthOpeningDistance if the game is not over
+        {
+            mouthOpeningDistance = distance;
+        }
     }
 }
-
-

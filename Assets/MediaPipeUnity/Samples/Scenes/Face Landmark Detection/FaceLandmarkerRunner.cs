@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Mediapipe.Tasks.Vision.FaceLandmarker;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -18,8 +18,22 @@ namespace Mediapipe.Unity.Sample.FaceLandmarkDetection
         public override void Stop()
         {
             base.Stop();
+
+            // Set taskApi to null instead of calling Dispose
+            taskApi = null;
+
+            // Dispose of the TextureFramePool
             _textureFramePool?.Dispose();
             _textureFramePool = null;
+
+            Debug.Log("MediaPipe resources cleaned up.");
+        }
+
+
+        public void ResetPipeline()
+        {
+            Stop(); // Clean up existing resources
+            Start(); // Restart the pipeline
         }
 
         protected override IEnumerator Run()
