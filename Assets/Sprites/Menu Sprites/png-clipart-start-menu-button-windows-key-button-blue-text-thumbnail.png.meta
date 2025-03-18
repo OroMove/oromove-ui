@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      png-clipart-start-menu-button-windows-key-button-blue-text-thumbnail_0: -2667527356797562018
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
