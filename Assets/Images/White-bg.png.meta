@@ -147,7 +147,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+<<<<<<< Updated upstream
+      OroDodgeBg_0: 4490332862700139402
+=======
+      White-bg_0: 5775165261311511955
+>>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

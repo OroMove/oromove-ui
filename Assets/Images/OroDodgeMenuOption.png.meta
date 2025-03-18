@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1967185e0da79b24da7dd685cc27f084
+guid: afe96cc8261cfad428b7ecf8bf45725c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4469963445573299516
-    second: jungle_beach_0
+      213: 7000665841360717728
+    second: OroDodgeMenuOption_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jungle_beach_0
+      name: OroDodgeMenuOption_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 705
-        height: 468
+        x: 1
+        y: 3
+        width: 748
+        height: 408
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3da0642210880e30800000000000000
-      internalID: 4469963445573299516
+      spriteID: 0a74489dd7c572160800000000000000
+      internalID: 7000665841360717728
       vertices: []
       indices: 
       edges: []
@@ -147,12 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-<<<<<<< Updated upstream
-    nameFileIdTable: {}
-=======
     nameFileIdTable:
-      jungle_beach_0: 4469963445573299516
->>>>>>> Stashed changes
+      OroDodgeMenuOption_0: 7000665841360717728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

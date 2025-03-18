@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1967185e0da79b24da7dd685cc27f084
+guid: c6b38158105f4764387cf3d7097bfc7e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4469963445573299516
-    second: jungle_beach_0
+      213: -3160636360548010221
+    second: "\u2014Pngtree\u2014game button game victory icon_5320573 (1)_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jungle_beach_0
+      name: "\u2014Pngtree\u2014game button game victory icon_5320573 (1)_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 705
-        height: 468
+        x: 110
+        y: 479
+        width: 974
+        height: 241
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3da0642210880e30800000000000000
-      internalID: 4469963445573299516
+      spriteID: 3173a51d9f92324d0800000000000000
+      internalID: -3160636360548010221
       vertices: []
       indices: 
       edges: []
@@ -147,12 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-<<<<<<< Updated upstream
-    nameFileIdTable: {}
-=======
     nameFileIdTable:
-      jungle_beach_0: 4469963445573299516
->>>>>>> Stashed changes
+      "\u2014Pngtree\u2014game button game victory icon_5320573 (1)_0": -3160636360548010221
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
