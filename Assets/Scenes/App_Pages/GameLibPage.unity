@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 818189448}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.32741424
+  m_Size: 0.32629773
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2252,6 +2252,7 @@ RectTransform:
   - {fileID: 212387407}
   - {fileID: 1811571872}
   - {fileID: 1799368738}
+  - {fileID: 1605082461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3282,7 +3283,7 @@ GameObject:
   - component: {fileID: 1173551370}
   - component: {fileID: 1173551369}
   m_Layer: 5
-  m_Name: Home (2)
+  m_Name: Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3305,8 +3306,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 12}
-  m_SizeDelta: {x: 19.05491, y: 65}
+  m_AnchoredPosition: {x: 12.699996, y: 12.75}
+  m_SizeDelta: {x: 18, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173551369
 MonoBehaviour:
@@ -4000,8 +4001,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -32.463, y: 12.75}
-  m_SizeDelta: {x: 19.85876, y: 55.5}
+  m_AnchoredPosition: {x: -34.9, y: 8}
+  m_SizeDelta: {x: 18, y: 55.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1537809630
 MonoBehaviour:
@@ -4193,6 +4194,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollbar: {fileID: 576838458}
+--- !u!1 &1605082460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605082461}
+  - component: {fileID: 1605082462}
+  m_Layer: 5
+  m_Name: NavbarManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1605082461
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605082460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 584560608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1605082462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605082460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e298594db4f5643b9be140eb2253c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homeButton: {fileID: 1537809630}
+  settingsButton: {fileID: 1925608697}
+  progressButton: {fileID: 1173551369}
+  gamesButton: {fileID: 1792074314}
 --- !u!1 &1649097746
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,7 +4621,7 @@ GameObject:
   - component: {fileID: 1792074315}
   - component: {fileID: 1792074314}
   m_Layer: 5
-  m_Name: Home (3)
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4592,7 +4645,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 30.7, y: 8}
-  m_SizeDelta: {x: 19.05491, y: 65}
+  m_SizeDelta: {x: 18, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792074314
 MonoBehaviour:
@@ -4637,7 +4690,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1792074315}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1792074315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5348,7 +5413,7 @@ GameObject:
   - component: {fileID: 1925608698}
   - component: {fileID: 1925608697}
   m_Layer: 5
-  m_Name: Home (1)
+  m_Name: Games
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5371,8 +5436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.538, y: 17.5}
-  m_SizeDelta: {x: 21.9916, y: 65}
+  m_AnchoredPosition: {x: -12.534, y: 12.75}
+  m_SizeDelta: {x: 20, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925608697
 MonoBehaviour:
