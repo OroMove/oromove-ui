@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OoroDodgeExitButton_0: -9108111812985216833
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
