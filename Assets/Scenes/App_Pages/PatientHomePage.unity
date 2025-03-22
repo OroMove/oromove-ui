@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 189825684}
   - component: {fileID: 189825683}
   m_Layer: 5
-  m_Name: Game1 (1)
+  m_Name: HillClimber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 212253386}
   - component: {fileID: 212253385}
   m_Layer: 5
-  m_Name: Img1 (2)
+  m_Name: ToGameLibrary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -925,7 +925,7 @@ GameObject:
   - component: {fileID: 456069801}
   - component: {fileID: 456069800}
   m_Layer: 5
-  m_Name: Img1
+  m_Name: ContinuePlaying
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3455,7 +3455,7 @@ GameObject:
   - component: {fileID: 1894347196}
   - component: {fileID: 1894347195}
   m_Layer: 5
-  m_Name: Img1 (1)
+  m_Name: Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4197,7 +4197,7 @@ GameObject:
   - component: {fileID: 2089523703}
   - component: {fileID: 2089523702}
   m_Layer: 5
-  m_Name: Img1 (3)
+  m_Name: UserDetails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4276,7 +4276,7 @@ GameObject:
   - component: {fileID: 2109582413}
   - component: {fileID: 2109582412}
   m_Layer: 5
-  m_Name: Game1
+  m_Name: OroDodge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
