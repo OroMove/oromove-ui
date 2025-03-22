@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 104965830}
   - component: {fileID: 104965829}
   m_Layer: 5
-  m_Name: Home (3)
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,6 +376,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176072616}
   m_CullTransparentMesh: 1
+--- !u!1 &178662230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178662231}
+  - component: {fileID: 178662232}
+  m_Layer: 5
+  m_Name: NavBarManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &178662231
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178662230}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6836824, y: 0.05783924, z: 0.86564}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1213823684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.600001, y: -45.400017}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &178662232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178662230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e298594db4f5643b9be140eb2253c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homeButton: {fileID: 975355862}
+  settingsButton: {fileID: 104965829}
+  progressButton: {fileID: 717535319}
+  gamesButton: {fileID: 1251414571}
 --- !u!1 &189825681
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +441,7 @@ GameObject:
   - component: {fileID: 189825684}
   - component: {fileID: 189825683}
   m_Layer: 5
-  m_Name: Game1 (1)
+  m_Name: HillClimber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -658,7 +710,7 @@ GameObject:
   - component: {fileID: 212253386}
   - component: {fileID: 212253385}
   m_Layer: 5
-  m_Name: Img1 (2)
+  m_Name: ToGameLibrary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,7 +925,7 @@ GameObject:
   - component: {fileID: 456069801}
   - component: {fileID: 456069800}
   m_Layer: 5
-  m_Name: Img1
+  m_Name: ContinuePlaying
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1552,7 +1604,7 @@ GameObject:
   - component: {fileID: 717535320}
   - component: {fileID: 717535319}
   m_Layer: 5
-  m_Name: Home (2)
+  m_Name: Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,7 +2090,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HomePage
+          m_StringArgument: PatientHomePage
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &975355863
@@ -2473,6 +2525,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1011452356}
+  - {fileID: 178662231}
   - {fileID: 625820515}
   m_Father: {fileID: 1328831254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2611,7 +2664,7 @@ GameObject:
   - component: {fileID: 1251414572}
   - component: {fileID: 1251414571}
   m_Layer: 5
-  m_Name: Home (1)
+  m_Name: Games
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3454,7 +3507,7 @@ GameObject:
   - component: {fileID: 1894347196}
   - component: {fileID: 1894347195}
   m_Layer: 5
-  m_Name: Img1 (1)
+  m_Name: Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4196,7 +4249,7 @@ GameObject:
   - component: {fileID: 2089523703}
   - component: {fileID: 2089523702}
   m_Layer: 5
-  m_Name: Img1 (3)
+  m_Name: UserDetails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4275,7 +4328,7 @@ GameObject:
   - component: {fileID: 2109582413}
   - component: {fileID: 2109582412}
   m_Layer: 5
-  m_Name: Game1
+  m_Name: OroDodge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

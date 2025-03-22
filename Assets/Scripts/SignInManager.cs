@@ -9,11 +9,20 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+public enum SignInError
+{
+    WrongUsernamePassword,
+    AccountNotFound,
+    ConnectionError,
+    UnexpectedError
+}
+
 public class SignInController : MonoBehaviour
 {
     public TMP_InputField emailInputField, passwordInputField;
     public Button nextButton, signInButton, backButton, forgotPasswordButton, signUpHereButton;
     public GameObject emailPanel, passwordPanel;
+    //public GameObject loadingPanel;
     public TextMeshProUGUI errorText;
 
     private string email;
@@ -77,13 +86,13 @@ public class SignInController : MonoBehaviour
             return;
         }
 
+        //loadingPanel.SetActive(true);
         Debug.Log("Signing in...");
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(email, password);
             Debug.Log("Sign-In successful!");
 
-            // Proceed to Home Page after successful login
             await RedirectUserBasedOnRole();
         }
         catch (RequestFailedException ex)
@@ -92,47 +101,49 @@ public class SignInController : MonoBehaviour
 
             if (ex.Message.Contains("WRONG_USERNAME_PASSWORD"))
             {
-                ShowErrorMessage("Incorrect email or password. Please try again.");
+                HandleSignInError(SignInError.WrongUsernamePassword);
             }
             else if (ex.Message.Contains("account not found"))
             {
-                ShowErrorMessage("Email not registered. Please sign up.");
+                HandleSignInError(SignInError.AccountNotFound);
             }
             else
             {
-                ShowErrorMessage("Sign-in failed. Check your connection and try again.");
+                HandleSignInError(SignInError.ConnectionError);
             }
         }
-        
+
         catch (System.Exception ex)
         {
             Debug.LogError("Unexpected Error: " + ex.Message);
-            ShowErrorMessage("An unexpected error occurred. Try again later.");
+            HandleSignInError(SignInError.UnexpectedError);
         }
+        finally
+        {
+            //loadingPanel.SetActive(false); 
+        }
+
     }
+
+    private const string RoleKey = "role"; // Define a constant key
 
     async Task RedirectUserBasedOnRole()
     {
         try
         {
-            string playerId = AuthenticationService.Instance.PlayerId;
-            Debug.Log("Fetching role for Player ID: " + playerId);
+            var data = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { RoleKey });
 
-            ISet<string> keys = new HashSet<string> { "role" };
-            var data = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
-
-            if (data.TryGetValue("role", out var roleData))
+            if (data.TryGetValue(RoleKey, out var roleData))
             {
                 string role = roleData.Value.GetAsString();
                 Debug.Log("User Role Retrieved: " + role);
 
-                if (role == "Therapist")
+                string nextScene = role == "Therapist" ? "TherapistEditProfilePage" :
+                                  (role == "Patient" ? "PatientHomePage" : null);
+
+                if (!string.IsNullOrEmpty(nextScene))
                 {
-                    SceneManager.LoadScene("TherapistHomePage");
-                }
-                else if (role == "Patient")
-                {
-                    SceneManager.LoadScene("PatientHomePage");
+                    SceneManager.LoadScene(nextScene);
                 }
                 else
                 {
@@ -150,8 +161,6 @@ public class SignInController : MonoBehaviour
             ShowErrorMessage("Failed to retrieve user data. Try again later.");
         }
     }
-
-
 
 
 
@@ -183,4 +192,24 @@ public class SignInController : MonoBehaviour
         errorText.text = message;
         errorText.gameObject.SetActive(true);
     }
+
+    void HandleSignInError(SignInError error)
+{
+    switch (error)
+    {
+        case SignInError.WrongUsernamePassword:
+            ShowErrorMessage("Incorrect email or password. Please try again.");
+            break;
+        case SignInError.AccountNotFound:
+            ShowErrorMessage("Email not registered. Please sign up.");
+            break;
+        case SignInError.ConnectionError:
+            ShowErrorMessage("Sign-in failed. Check your connection and try again.");
+            break;
+        case SignInError.UnexpectedError:
+        default:
+            ShowErrorMessage("An unexpected error occurred. Try again later.");
+            break;
+    }
+}
 }
