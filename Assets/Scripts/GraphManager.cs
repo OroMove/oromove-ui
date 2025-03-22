@@ -15,12 +15,15 @@ public class Graph : MonoBehaviour
     public GameObject graphContainer;     // The container where the graph will be drawn
     public GameObject linePrefab;         // Prefab for drawing the line (Must be assigned in Inspector)
     public Button LoadDataButton;         // Button to fetch and display data
-    public TMP_Text NoDataText; // For TextMeshPro components
-                                // UI Text to display "Please play this level" message
+    public TMP_Text NoDataText;           // For TextMeshPro components to display "No Data" message
 
     // UI for Game Name and Unlocked Level
     public TMP_Text GameNameText;    // Text to display Game Name
     public TMP_Text UnlockedLevelText; // Text to display Unlocked Level
+
+    // Tooltip Panel and Tooltip Text
+    public GameObject TooltipPanel; // Tooltip panel to show
+    public TMP_Text TooltipText;    // Text component to display the tooltip content
 
     private Dictionary<int, List<float>> levelMaxMouthOpeningData = new Dictionary<int, List<float>>();
 
@@ -65,6 +68,9 @@ public class Graph : MonoBehaviour
 
         // Set default graph (Level 1)
         DrawGraph(1);
+
+        // Add listener for dropdown value change
+        levelDropdown.onValueChanged.AddListener(delegate { OnLevelChanged(levelDropdown.value); });
     }
 
     private void PopulateDropdown()
@@ -154,9 +160,9 @@ public class Graph : MonoBehaviour
                 if (levelData != null)
                 {
                     // Display the Game Name
-                    GameNameText.text = "HillClimber";  // Put your game name here
+                    GameNameText.text = "Game : HillClimber";  // Put your game name here
                     // Display the Unlocked Level
-                    UnlockedLevelText.text = $"Unlocked Level: {levelData.unlockedLevel}";
+                    UnlockedLevelText.text = $"Level Unlocked: {levelData.unlockedLevel}";
 
                     Debug.Log($"✅ Game Name and Unlocked Level displayed successfully.");
                 }
@@ -182,6 +188,12 @@ public class Graph : MonoBehaviour
         DrawGraph(selectedLevel);
     }
 
+    private void OnLevelChanged(int levelIndex)
+    {
+        int selectedLevel = levelIndex + 1;  // Convert dropdown index to level number (1-based)
+        DrawGraph(selectedLevel);
+    }
+
     private void DrawGraph(int level)
     {
         // Clear previous graph elements
@@ -190,40 +202,59 @@ public class Graph : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        if (!levelMaxMouthOpeningData.ContainsKey(level))
+        if (!levelMaxMouthOpeningData.ContainsKey(level) || levelMaxMouthOpeningData[level].Count == 0)
         {
-            Debug.LogWarning($" No data found for Level {level}. Prompting user to play.");
-            NoDataText.text = " Keep going! You haven’t unlocked this level yet, but you’re close!!";
+            NoDataText.text = "Keep going! You haven’t unlocked this level yet, but you’re close!!";
             NoDataText.gameObject.SetActive(true);
             return;
         }
 
-        NoDataText.gameObject.SetActive(false);  // Hide the "No Data" message
+        NoDataText.gameObject.SetActive(false);
         List<float> data = levelMaxMouthOpeningData[level];
 
-        // Validate Prefab Assignment
+        // Ensure linePrefab is assigned in the Inspector
         if (linePrefab == null)
         {
-            Debug.LogError("❌ Line Prefab is not assigned! Assign it in the Inspector.");
+            Debug.LogError("Line Prefab is not assigned!");
             return;
         }
 
-        float graphWidth = graphContainer.GetComponent<RectTransform>().rect.width;
-        float stepSize = graphWidth / (data.Count + 1); // Ensure spacing between bars
-        float maxHeight = 300f;  // Adjust based on UI scaling
-
+        // Iterate through the data and add graph points
         for (int i = 0; i < data.Count; i++)
         {
-            float xPosition = (i + 1) * stepSize;
-            float yPosition = Mathf.Clamp(data[i] * 380f, 20f, maxHeight); // Scale mouth opening values
+            if (data[i] == 0) // Skip invalid (zero) data points
+            {
+                continue;
+            }
 
+            // Create a new graph point (line) for valid data
             GameObject line = Instantiate(linePrefab, graphContainer.transform);
+            TooltipHandler tooltipHandler = line.GetComponent<TooltipHandler>();
+
+            // Set the mouth distance value for the tooltip handler
+            tooltipHandler.SetMouthDistance(data[i]);
+
+            // Initialize tooltip (this ensures the correct panel and text are used)
+            tooltipHandler.InitializeTooltip(TooltipPanel, TooltipText);
+
+            // Position the graph point (line)
+            float xPosition = (i + 1) * (graphContainer.GetComponent<RectTransform>().rect.width / (data.Count + 5));
+            float yPosition = Mathf.Clamp(data[i] * 300f, 10f, 480f); // Scale mouth opening values
+
             RectTransform lineRectTransform = line.GetComponent<RectTransform>();
             lineRectTransform.anchoredPosition = new Vector2(xPosition, yPosition);
-            lineRectTransform.sizeDelta = new Vector2(37f, 45f);  // Thin vertical bars
-        }
 
-        Debug.Log($"✅ Graph for Level {level} drawn successfully.");
+            // Adjust the size of the line element
+            float width = 30f;
+            lineRectTransform.sizeDelta = new Vector2(width, lineRectTransform.sizeDelta.y);
+        }
+    }
+
+
+    [System.Serializable]
+    public class LevelData
+    {
+        public int unlockedLevel;
     }
 
     [System.Serializable]
@@ -232,10 +263,4 @@ public class Graph : MonoBehaviour
         public float MaxMouthOpening;
     }
 
-    [System.Serializable]
-    public class LevelData
-    {
-        public Dictionary<string, bool> completedLevels;
-        public int unlockedLevel;
-    }
 }
