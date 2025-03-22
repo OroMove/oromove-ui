@@ -37,8 +37,8 @@ public class SignUpManager : MonoBehaviour
         signInButton.onClick.AddListener(GoToSignIn);
 
         // Back Buttons
-        backToEmailButton.onClick.AddListener(() => PreviousStep(0));  // Confirm Password ? Password Panel
-        backToPasswordButton.onClick.AddListener(() => PreviousStep(1));  // Password ? Email Panel
+        backToEmailButton.onClick.AddListener(() => PreviousStep(0));  //Password Panel
+        backToPasswordButton.onClick.AddListener(() => PreviousStep(1));  //Email Panel
         backToRoleButton.onClick.AddListener(GoBackToWhoAreYou);
     }
 
