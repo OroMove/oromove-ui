@@ -42,9 +42,11 @@ public class GameManager : MonoBehaviour
 {
     private Dictionary<int, LevelProgress> levelProgressData = new Dictionary<int, LevelProgress>();
     private bool isGameInitialized = false;
+    private bool isGamePaused = false;
 
     public GameObject gameOverScreen;
     public GameObject levelCompletePanel;
+    public GameObject pauseMenu; // Add a reference to your pause menu UI
     public CarController car;
     public Text coinCounterText;
     public Text distanceText;
@@ -90,6 +92,29 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Initialization complete. Current total attempts: {levelProgressData[currentLevel].totalAttempts}");
         isGameInitialized = true;
         UpdateUI();
+    }
+
+    // Add Pause and Resume methods
+    public void PauseGame()
+    {
+        if (!isGamePaused)
+        {
+            Debug.Log("[GameManager] Pausing game");
+            Time.timeScale = 0f;
+            isGamePaused = true;
+            pauseMenu.SetActive(true); // Show the pause menu
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (isGamePaused)
+        {
+            Debug.Log("[GameManager] Resuming game");
+            Time.timeScale = 1f;
+            isGamePaused = false;
+            pauseMenu.SetActive(false); // Hide the pause menu
+        }
     }
 
     private async Task LoadAndSyncProgress(int levelId)
@@ -327,7 +352,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!isGameInitialized) return;
+        if (!isGameInitialized || isGamePaused) return;
 
         CheckGameOver();
         CalculateDistanceTravelled();
@@ -411,7 +436,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("[ExitGame] Quitting application");
-        Application.Quit();
+        Debug.Log("Back to Main Menu");
+        SceneManager.LoadSceneAsync("HillClimberGameMenu");
     }
 }
