@@ -5,7 +5,7 @@ public class OD_LevelSelection : MonoBehaviour
 {
     public void OpenLevel(int levelID)
     {
-        string levelName = "OD_Level" + levelID;
+        string levelName = "OD_Level_0" + levelID;
         SceneManager.LoadScene(levelName);
     }
 

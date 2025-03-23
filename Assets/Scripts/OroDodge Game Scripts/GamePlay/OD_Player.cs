@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
     public void WinGame()
     {
         hasWon = true; // Mark player as having won
-        rb.linearVelocity = Vector2.zero; // Stop movement
+        rb.linearVelocity = Vector2.zero; // Use 'velocity' instead of 'linearVelocity'
         spriteRenderer.sprite = victorySprite; // Set sprite to victory
         Debug.Log("Player has won! Victory sprite set.");
     }

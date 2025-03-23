@@ -176,11 +176,11 @@ public class ODGameManager : MonoBehaviour
 
         if (activeBlocks <= 0 && blocksSpawned >= blocksPerLevel)
         {
-            // Only show the Level Complete panel if the game hasn't ended
+            // Only show the Level Complete panel if the game has ended
             if (!gameOver)
             {
-                levelCompletePanel?.SetActive(true);
                 StopAllCoroutines();
+                levelCompletePanel?.SetActive(true);
                 gameOverPanel?.SetActive(false);
                 DisplayLevelCompleteInfo();
             }
@@ -211,6 +211,22 @@ public class ODGameManager : MonoBehaviour
         return $"{minutes:D2}:{seconds:D2}";
     }
 
+    public void Home()
+    {
+        SceneManager.LoadSceneAsync("OD_MainMenu");
+    }
+
+    public void NextLevel(int levelID)
+    {
+        string levelName = "OD_Level_0" + levelID;
+        SceneManager.LoadScene(levelName);
+    }
+
+    public void CloseLevel()
+    {
+        SceneManager.LoadSceneAsync("OD_LevelSelection");
+    }
+
     public void RetryGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -219,20 +235,5 @@ public class ODGameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void NextLevel()
-    {
-        SceneManager.LoadSceneAsync("OD_Level2");
-    }
-
-    public void CloseLevel()
-    {
-        SceneManager.LoadSceneAsync("OD_LevelSelection");
-    }
-
-    public void Home()
-    {
-        SceneManager.LoadSceneAsync("OD_MainMenu");
     }
 }

@@ -4,7 +4,7 @@ public class Block : MonoBehaviour
 {
     private bool scored = false;
     private ODGameManager gameManager;
-    public float fallSpeedMultiplier = 0.1f; // Adjust this value to change speed
+    public float fallSpeedMultiplier; // Adjust this value to change speed
 
     private Rigidbody2D rb;
 
