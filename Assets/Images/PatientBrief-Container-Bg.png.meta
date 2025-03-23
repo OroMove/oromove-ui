@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: afe96cc8261cfad428b7ecf8bf45725c
+guid: 955f19d28748ac940a27e262f55073bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7000665841360717728
-    second: OroDodgeMenuOption_0
+      213: -432297613360332766
+    second: PatientBrief-Container-Bg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,32 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OroDodgeMenuOption_0
+      name: PatientBrief-Container-Bg_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 748
-        height: 408
+        x: 614
+        y: 684
+        width: 692
+        height: 549
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a74489dd7c572160800000000000000
-      internalID: 7000665841360717728
+      spriteID: 220886e6c9b200af0800000000000000
+      internalID: -432297613360332766
       vertices: []
       indices: 
       edges: []
@@ -162,8 +147,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
+<<<<<<< Updated upstream
+    nameFileIdTable: {}
+=======
     nameFileIdTable:
-      OroDodgeMenuOption_0: 7000665841360717728
+      PatientBrief-Container-Bg_0: -432297613360332766
+>>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

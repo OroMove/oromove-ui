@@ -98,13 +98,14 @@ public class PatientProfileCreationController : MonoBehaviour
         {
             await SavePatientProfile();
 
-            string fullName = fullNameInput.text.Trim();
-            string dob = dobInput.text.Trim();
-            string diagnosis = diagnosisInput.text.Trim();
-            float severityLevel = severityLevelSlider.value;
+            await PatientSubmission(
+                fullNameInput.text.Trim(),
+                diagnosisInput.text.Trim(),
+                severityLevelSlider.value,
+                CalculateAge(dobInput.text.Trim()),
+                genderDropdown.options[genderDropdown.value].text
+            );
 
-            // Submit to leaderboard with extracted values
-            await PatientSubmission(fullName, dob, diagnosis, severityLevel);
 
             SceneManager.LoadScene("PatientHomePage");
         }
@@ -145,61 +146,45 @@ public class PatientProfileCreationController : MonoBehaviour
         );
     }
 
-    public async Task PatientSubmission(
-        string fullName,
-        string dob,
-        string diagnosis,
-        float severityLevel
-    )
+    public async Task PatientSubmission(string fullName, string diagnosis, float severityLevel, int age, string gender)
     {
-        if (
-            string.IsNullOrEmpty(fullName)
-            || string.IsNullOrEmpty(dob)
-            || string.IsNullOrEmpty(diagnosis)
-        )
+        if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(diagnosis) || string.IsNullOrEmpty(gender))
         {
-            Debug.LogError("Error: Name, Age, or Diagnosis is empty! Data will not be submitted.");
+            Debug.LogError("Error: Name, Diagnosis, or Gender is empty! Data will not be submitted.");
             return;
         }
 
-        // Calculate Age from Date of Birth
-        int age = CalculateAge(dob);
-
-        var metadata = new Dictionary<string, string>
-        {
-            { "Name", fullName },
-            { "Age", age.ToString() },
-            { "Diagnosis", diagnosis },
-            { "SeverityLevel", severityLevel.ToString("0.0") },
-        };
-
-        var metadataJson = JsonConvert.SerializeObject(metadata);
         var options = new AddPlayerScoreOptions
         {
-            Metadata = new Dictionary<string, string> { { "data", metadataJson } },
+            Metadata = new Dictionary<string, string>
+        {
+            { "Name", fullName },
+            { "Diagnosis", diagnosis },
+            { "SeverityLevel", severityLevel.ToString() },
+            { "Age", age.ToString() },
+            { "Gender", gender }
+        },
         };
 
-        Debug.Log(
-            $"Submitting to leaderboard: Name={fullName}, Age={age}, Diagnosis={diagnosis}, Severity Level={severityLevel}"
-        );
+        Debug.Log($"Submitting to leaderboard: Name={fullName}, Diagnosis={diagnosis}, SeverityLevel={severityLevel}, Age={age}, Gender={gender}");
 
         try
         {
             var result = await LeaderboardsService.Instance.AddPlayerScoreAsync(
                 "PatientLeaderboard",
-                (int)severityLevel,
+                Mathf.RoundToInt(severityLevel), // Using severity level as the score
                 options
             );
 
-            Debug.Log(
-                $"Successfully submitted! Stored Metadata: {JsonConvert.SerializeObject(metadata)}"
-            );
+            Debug.Log($"Successfully submitted! Stored Metadata: {JsonConvert.SerializeObject(options.Metadata)}");
         }
         catch (Exception ex)
         {
             Debug.LogError($"Failed to submit leaderboard entry: {ex.Message}");
         }
     }
+
+
 
     async Task InitializeUnityServices()
     {
@@ -274,8 +259,8 @@ public class PatientProfileCreationController : MonoBehaviour
     }
 
     bool ValidateName(string name) => Regex.IsMatch(name, "^[a-zA-Z ]+$");
-
     bool ValidateContactNumber(string number) => Regex.IsMatch(number, @"^0\d{9}$");
+
 
     bool ValidateEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 }

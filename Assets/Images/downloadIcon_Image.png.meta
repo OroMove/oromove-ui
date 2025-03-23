@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: afe96cc8261cfad428b7ecf8bf45725c
+guid: 5f05f2d2ca88b7b48a5cbe6de71029ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7000665841360717728
-    second: OroDodgeMenuOption_0
+      213: 1228126607698874187
+    second: downloadIcon_Image_0
+  - first:
+      213: 4165867841611518182
+    second: downloadIcon_Image_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,32 +112,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OroDodgeMenuOption_0
+      name: downloadIcon_Image_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 748
-        height: 408
+        x: 595
+        y: 545
+        width: 730
+        height: 279
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a74489dd7c572160800000000000000
-      internalID: 7000665841360717728
+      spriteID: b4fc81f84ae2b0110800000000000000
+      internalID: 1228126607698874187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: downloadIcon_Image_1
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 711
+        width: 368
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e05a70fab220d930800000000000000
+      internalID: 4165867841611518182
       vertices: []
       indices: 
       edges: []
@@ -162,8 +172,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
+<<<<<<< Updated upstream
+    nameFileIdTable: {}
+=======
     nameFileIdTable:
-      OroDodgeMenuOption_0: 7000665841360717728
+      downloadIcon_Image_0: 1228126607698874187
+      downloadIcon_Image_1: 4165867841611518182
+>>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

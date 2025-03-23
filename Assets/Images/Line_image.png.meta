@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: afe96cc8261cfad428b7ecf8bf45725c
+guid: 21f065577d1c54249afa6a3648291122
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7000665841360717728
-    second: OroDodgeMenuOption_0
+      213: 8434551933505519484
+    second: Line_image_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,32 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OroDodgeMenuOption_0
+      name: Line_image_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 748
-        height: 408
+        x: 647
+        y: 1108
+        width: 626
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a74489dd7c572160800000000000000
-      internalID: 7000665841360717728
+      spriteID: c7f3e2c9b4c8d0570800000000000000
+      internalID: 8434551933505519484
       vertices: []
       indices: 
       edges: []
@@ -163,7 +148,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OroDodgeMenuOption_0: 7000665841360717728
+<<<<<<< Updated upstream
+      EditPenBlack_0: -4289753911017987420
+=======
+      Line_image_0: 8434551933505519484
+>>>>>>> Stashed changes
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
