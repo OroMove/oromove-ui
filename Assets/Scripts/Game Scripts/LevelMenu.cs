@@ -86,16 +86,20 @@ public class LevelMenu : MonoBehaviour
 
             if (!AuthenticationService.Instance.IsSignedIn)
             {
-                await AuthenticationService.Instance.SignInAnonymouslyAsync();
-                Debug.Log($"[LevelMenu] Signed in. Player ID: {AuthenticationService.Instance.PlayerId}");
+                Debug.LogError("[LevelMenu] Player is not signed in! Redirecting to Sign-In page...");
+                SceneManager.LoadScene("SignInPage"); // Ensure you have a sign-in scene
+                return;
             }
+
+            Debug.Log($"[LevelMenu] Signed in as Player ID: {AuthenticationService.Instance.PlayerId}");
         }
         catch (Exception e)
         {
             Debug.LogError($"[LevelMenu] Service initialization failed: {e.Message}");
-            throw;
+            SceneManager.LoadScene("SignInPage"); // Redirect if there's an issue
         }
     }
+
 
     private async Task LoadOrInitializeLevelData()
     {
@@ -273,9 +277,9 @@ public class LevelMenu : MonoBehaviour
             levelData.completedLevels[completedLevelNumber] = true;
 
             // Unlock next level
-            if (completedLevelNumber >= levelData.unlockedLevel - 1)
+            if (completedLevelNumber >= levelData.unlockedLevel)
             {
-                levelData.unlockedLevel = completedLevelNumber + 2;
+                levelData.unlockedLevel = completedLevelNumber + 1;
                 Debug.Log($"[LevelMenu] Unlocking next level. New unlocked level: {levelData.unlockedLevel}");
             }
 

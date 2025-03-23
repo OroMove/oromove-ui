@@ -97,6 +97,7 @@ public class PatientProfileCreationController : MonoBehaviour
         try
         {
             await SavePatientProfile();
+
             await PatientSubmission(
                 fullNameInput.text.Trim(),
                 diagnosisInput.text.Trim(),
@@ -184,6 +185,7 @@ public class PatientProfileCreationController : MonoBehaviour
     }
 
 
+
     async Task InitializeUnityServices()
     {
         if (
@@ -257,8 +259,8 @@ public class PatientProfileCreationController : MonoBehaviour
     }
 
     bool ValidateName(string name) => Regex.IsMatch(name, "^[a-zA-Z ]+$");
+    bool ValidateContactNumber(string number) => Regex.IsMatch(number, @"^0\d{9}$");
 
-    bool ValidateContactNumber(string number) => Regex.IsMatch(number, @"^\d{10,15}$");
 
     bool ValidateEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 }

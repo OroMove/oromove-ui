@@ -1,6 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI; // For UI components like Image and Text
-using System.Collections.Generic; // For storing distances and speeds in lists
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class CarController : MonoBehaviour
 {
@@ -29,11 +31,37 @@ public class CarController : MonoBehaviour
     public Text speedText; // Text component to display speed
     public GameObject finishFlag; // Reference to the finish line flag
 
+    private bool isGameOver = false; // Flag to check if the game is over
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == finishFlag) // When colliding with the finish line
         {
+            isGameOver = true; // Stop processing MediaPipe data
             FindObjectOfType<GameManager>().LevelComplete(); // Trigger level completion
+
+            // Add the level unlocking code here
+            string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            if (int.TryParse(currentSceneName.Replace("HC - Level ", ""), out int currentLevelNumber))
+            {
+                Debug.Log($"[CarController] Unlocking next level after completing level {currentLevelNumber}");
+
+                // Call LevelMenu's static method to unlock the next level
+                LevelMenu.UnlockNextLevel(currentLevelNumber).ContinueWith(task => {
+                    if (task.Exception != null)
+                    {
+                        Debug.LogError($"[CarController] Error unlocking next level: {task.Exception.Message}");
+                    }
+                    else
+                    {
+                        Debug.Log($"[CarController] Successfully unlocked level {currentLevelNumber + 1}");
+                    }
+                });
+            }
+            else
+            {
+                Debug.LogError("[CarController] Could not parse level number from scene name: " + currentSceneName);
+            }
         }
     }
 
@@ -45,7 +73,7 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (fuelLevel > 0)
+        if (fuelLevel > 0 && !isGameOver) // Only process movement if the game is not over
         {
             MouthDetectionMovement();
         }
@@ -70,7 +98,7 @@ public class CarController : MonoBehaviour
             mouthOpeningDistances.Add(mouthOpeningDistance);
             speeds.Add(speedOfCar);
 
-            speedText.text = "Speed: " + Mathf.Round(speedOfCar).ToString();
+            speedText.text = "Speed: " + Mathf.Round(speedOfCar).ToString() + "m/s";
 
             float adjustedTorque = speedOfCar * Time.fixedDeltaTime;
             rearWheel.AddTorque(-adjustedTorque);
@@ -93,7 +121,7 @@ public class CarController : MonoBehaviour
 
             // Update UI with actual speed
             float currentSpeed = rearWheel.linearVelocity.magnitude * 10f; // Scale for readability
-            speedText.text = "Speed: " + Mathf.Round(currentSpeed).ToString();
+            speedText.text = "Speed: " + Mathf.Round(currentSpeed).ToString() + "m/s";
         }
     }
 
@@ -114,6 +142,9 @@ public class CarController : MonoBehaviour
 
     public void SetMouthOpeningDistance(float distance)
     {
-        mouthOpeningDistance = distance;
+        if (!isGameOver) // Only update mouthOpeningDistance if the game is not over
+        {
+            mouthOpeningDistance = distance;
+        }
     }
 }

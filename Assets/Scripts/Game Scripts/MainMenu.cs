@@ -10,6 +10,6 @@ public class MainMenu : MonoBehaviour
 
     public void BackToPlayList()
     {
-        SceneManager.LoadSceneAsync("PlayList Scene");
+        SceneManager.LoadSceneAsync("HillClimberPage");
     }
 }

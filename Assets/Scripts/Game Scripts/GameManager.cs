@@ -42,9 +42,11 @@ public class GameManager : MonoBehaviour
 {
     private Dictionary<int, LevelProgress> levelProgressData = new Dictionary<int, LevelProgress>();
     private bool isGameInitialized = false;
+    private bool isGamePaused = false;
 
     public GameObject gameOverScreen;
     public GameObject levelCompletePanel;
+    public GameObject pauseMenu; // Add a reference to your pause menu UI
     public CarController car;
     public Text coinCounterText;
     public Text distanceText;
@@ -64,52 +66,56 @@ public class GameManager : MonoBehaviour
 
     private async void Start()
     {
-        Time.timeScale = 1f; // Reset time scale to prevent freezing
         Debug.Log("[GameManager] Starting initialization sequence...");
         await InitializeUGS();
+        await SignIn();
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        Debug.Log($"[GameManager] Current scene name: {currentSceneName}");
-
-        // Ensure the scene name matches the expected format
-        if (!currentSceneName.StartsWith("HC - Level"))
-        {
-            Debug.LogError("[GameManager] Invalid scene name format! Cannot proceed.");
-            return;
-        }
-
-        // Extract the level number from the scene name (e.g., "HC - Level 1" => 1)
-        int levelNumber;
-        if (!int.TryParse(currentSceneName.Replace("HC - Level ", ""), out levelNumber))
-        {
-            Debug.LogError("[GameManager] Failed to parse level number from scene name.");
-            return;
-        }
-
-        // Ensure the level number is valid (between 1 and 6)
-        if (levelNumber < 1 || levelNumber > 6)
-        {
-            Debug.LogError("[GameManager] Invalid level number! Cannot proceed.");
-            return;
-        }
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log($"[GameManager] Current scene level index: {currentLevel}");
 
         startingPosition = playerTransform.position;
         startTime = Time.time;
 
-        await LoadAndSyncProgress(levelNumber);
+        // Load existing progress before initializing new data
+        await LoadAndSyncProgress(currentLevel);
 
-        if (!levelProgressData.ContainsKey(levelNumber))
+        if (!levelProgressData.ContainsKey(currentLevel))
         {
-            Debug.Log($"[GameManager] No progress found after load, initializing new progress for Level {levelNumber}");
-            levelProgressData[levelNumber] = new LevelProgress { levelId = levelNumber, totalAttempts = 0 };
+            Debug.Log($"[GameManager] No progress found after load, initializing new progress for Level {currentLevel}");
+            levelProgressData[currentLevel] = new LevelProgress
+            {
+                levelId = currentLevel,
+                totalAttempts = 0
+            };
         }
 
-        Debug.Log($"[GameManager] Initialization complete. Current total attempts: {levelProgressData[levelNumber].totalAttempts}");
+        Debug.Log($"[GameManager] Initialization complete. Current total attempts: {levelProgressData[currentLevel].totalAttempts}");
         isGameInitialized = true;
         UpdateUI();
     }
 
+    // Add Pause and Resume methods
+    public void PauseGame()
+    {
+        if (!isGamePaused)
+        {
+            Debug.Log("[GameManager] Pausing game");
+            Time.timeScale = 0f;
+            isGamePaused = true;
+            pauseMenu.SetActive(true); // Show the pause menu
+        }
+    }
 
+    public void ResumeGame()
+    {
+        if (isGamePaused)
+        {
+            Debug.Log("[GameManager] Resuming game");
+            Time.timeScale = 1f;
+            isGamePaused = false;
+            pauseMenu.SetActive(false); // Hide the pause menu
+        }
+    }
 
     private async Task LoadAndSyncProgress(int levelId)
     {
@@ -124,8 +130,7 @@ public class GameManager : MonoBehaviour
             Debug.Log($"[LoadAndSyncProgress] Total keys in cloud save: {allKeysList.Count}");
 
             // Get all keys for this level
-            var levelKeys = allKeysList.Where(k => k.StartsWith($"HC - Level_{levelId}_")).ToList();
-
+            var levelKeys = allKeysList.Where(k => k.StartsWith($"Level_{levelId}_")).ToList();
             Debug.Log($"[LoadAndSyncProgress] Keys for Level {levelId}: {string.Join(", ", levelKeys)}");
 
             if (levelKeys.Count > 0)
@@ -140,8 +145,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 // Load metadata
-                string metaKey = $"HC - Level_{levelId}_Meta";
-
+                string metaKey = $"Level_{levelId}_Meta";
                 if (result.TryGetValue(metaKey, out var metaData))
                 {
                     string metaJson = JsonConvert.SerializeObject(metaData.Value);
@@ -226,15 +230,14 @@ public class GameManager : MonoBehaviour
             // Create save data dictionary
             var saveData = new Dictionary<string, object>
             {
-                [$"HC - Level_{levelId}_Meta"] = new Dictionary<string, object>
+                [$"Level_{levelId}_Meta"] = new Dictionary<string, object>
                 {
                     ["LevelId"] = levelId,
                     ["TotalAttempts"] = progress.totalAttempts,
                     ["LastUpdated"] = DateTime.UtcNow.ToString("o")
                 },
-                [$"HC - Level_{levelId}_Attempt_{progress.totalAttempts}"] = attemptData
+                [$"Level_{levelId}_Attempt_{progress.totalAttempts}"] = attemptData
             };
-
 
             Debug.Log($"[SaveLevelProgress] Preparing to save - Meta: {JsonConvert.SerializeObject(saveData[$"Level_{levelId}_Meta"])}");
 
@@ -304,8 +307,6 @@ public class GameManager : MonoBehaviour
         return data;
     }
 
-
-
     private async Task InitializeUGS()
     {
         Debug.Log("[InitializeUGS] Starting Unity Game Services initialization...");
@@ -327,9 +328,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private async Task SignIn()
+    {
+        Debug.Log("[SignIn] Starting authentication...");
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            try
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                Debug.Log($"[SignIn] Successfully signed in. Player ID: {AuthenticationService.Instance.PlayerId}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[SignIn] Authentication failed: {e.Message}");
+                throw;
+            }
+        }
+        else
+        {
+            Debug.Log("[SignIn] Already signed in");
+        }
+    }
+
     void Update()
     {
-        if (!isGameInitialized) return;
+        if (!isGameInitialized || isGamePaused) return;
 
         CheckGameOver();
         CalculateDistanceTravelled();
@@ -363,7 +386,6 @@ public class GameManager : MonoBehaviour
         if (!levelCompletePanel.activeSelf && !gameOverScreen.activeSelf)
         {
             Debug.Log("[LevelComplete] Displaying level complete screen");
-            Time.timeScale = 0f;
             levelCompletePanel.SetActive(true);
 
             UpdateFinalStats();
@@ -371,7 +393,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateFinalStats()
+    private void UpdateFinalStats()
     {
         float elapsedTime = Time.time - startTime;
         finalDistanceText.text = $"Distance: {currentDistance:F0} m";
@@ -414,7 +436,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("[ExitGame] Quitting application");
-        Application.Quit();
+        Debug.Log("Back to Main Menu");
+        SceneManager.LoadSceneAsync("HillClimberGameMenu");
     }
 }
