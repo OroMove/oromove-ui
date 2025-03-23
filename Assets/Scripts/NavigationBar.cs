@@ -15,7 +15,8 @@ public class NavigationBar : MonoBehaviour
         // Add listener to each button
         homeButton.onClick.AddListener(() => LoadScene("PatientHomePage"));
         settingsButton.onClick.AddListener(() => LoadScene("PatientSettingsPage"));
-        progressButton.onClick.AddListener(() => LoadScene("PatientHomePage"));
+        progressButton.onClick.AddListener(() => LoadScene("ProgressDashboard"));
+
         gamesButton.onClick.AddListener(() => LoadScene("GameLibPage"));
     }
 
