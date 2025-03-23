@@ -172,7 +172,9 @@ public class TherapistEditProfileController : MonoBehaviour
 
     void OnBackButtonClicked()
     {
+
         SceneManager.LoadScene("TherapistSettings");
+
     }
 
     // Toggles between edit mode and view mode

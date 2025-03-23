@@ -322,8 +322,6 @@ MonoBehaviour:
       m_LigatureGlyphID: 1195
     - m_ComponentGlyphIDs: 48000000ad000000
       m_LigatureGlyphID: 1193
-<<<<<<< Updated upstream
-=======
     - m_ComponentGlyphIDs: 27000000a9000000
       m_LigatureGlyphID: 700
     - m_ComponentGlyphIDs: 57000000a9000000
@@ -444,7 +442,6 @@ MonoBehaviour:
       m_LigatureGlyphID: 747
     - m_ComponentGlyphIDs: 30000000ad000000
       m_LigatureGlyphID: 1202
->>>>>>> Stashed changes
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 56
@@ -19466,8 +19463,6 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 77
-<<<<<<< Updated upstream
-=======
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 39
         m_GlyphValueRecord:
@@ -58063,7 +58058,6 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
->>>>>>> Stashed changes
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []
   m_ShouldReimportFontFeatures: 0
