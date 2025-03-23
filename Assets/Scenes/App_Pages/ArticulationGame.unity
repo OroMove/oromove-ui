@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007bed2f70819f447a9be3be04f515df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: OroTwisterPage
+  targetScene: 
 --- !u!114 &1542055240
 MonoBehaviour:
   m_ObjectHideFlags: 0
