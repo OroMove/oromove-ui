@@ -40,6 +40,8 @@ public class ODGameManager : MonoBehaviour
     private int blocksSpawned = 0;
     private int activeBlocks = 0; // Track number of active blocks
 
+    private string currentLevelName; // Store current level name for high score
+
     // Public properties to access gameStarted and gameOver
     public bool IsGameStarted => gameStarted;
     public bool IsGameOver => gameOver;
@@ -48,7 +50,10 @@ public class ODGameManager : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
         await SignIn();
-        await LoadHighestScore();
+
+        // Get the current level name and load its highest score
+        currentLevelName = SceneManager.GetActiveScene().name;
+        await LoadHighestScore(currentLevelName);
 
         timeText.text = "";
         gameOverPanel?.SetActive(false);
@@ -115,11 +120,12 @@ public class ODGameManager : MonoBehaviour
 
         scoreValueText.text = "Score: " + score;
 
+        // Update and save the highest score specific to the current level
         if (score > highestScore)
         {
             highestScore = score;
             highestScoreText.text = "New Top Score: " + highestScore;
-            await SaveHighestScore(highestScore);
+            await SaveHighestScore(currentLevelName, highestScore);
             Debug.Log($"Saving New Highest Score: {score}");
         }
         else
@@ -131,14 +137,14 @@ public class ODGameManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    private async Task LoadHighestScore()
+    private async Task LoadHighestScore(string levelName)
     {
         try
         {
-            var data = await CloudSaveService.Instance.Data.LoadAsync(new HashSet<string> { "highest_score" });
-            if (data.ContainsKey("highest_score"))
+            var data = await CloudSaveService.Instance.Data.LoadAsync(new HashSet<string> { levelName + "_highest_score" });
+            if (data.ContainsKey(levelName + "_highest_score"))
             {
-                highestScore = int.Parse(data["highest_score"].ToString());
+                highestScore = int.Parse(data[levelName + "_highest_score"].ToString());
                 highestScoreText.text = "Top Score: " + highestScore;
             }
         }
@@ -149,17 +155,17 @@ public class ODGameManager : MonoBehaviour
         }
     }
 
-    private async Task SaveHighestScore(int newScore)
+    private async Task SaveHighestScore(string levelName, int newScore)
     {
         try
         {
-            var data = new Dictionary<string, object> { { "highest_score", newScore } };
+            var data = new Dictionary<string, object> { { levelName + "_highest_score", newScore } };
             await CloudSaveService.Instance.Data.ForceSaveAsync(data);
 
             Debug.Log($"Successfully saved highest score: {newScore}");
 
             // Load again to confirm it's saved
-            await LoadHighestScore();
+            await LoadHighestScore(levelName);
         }
         catch (System.Exception e)
         {
