@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Unity.Services.CloudSave;
 using Unity.Services.Leaderboards;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,13 +47,17 @@ public class TherapistLeaderboardManager : MonoBehaviour
 
     public async Task<List<TherapistData>> GetTherapistsForPatients()
     {
-        var response = await LeaderboardsService.Instance.GetScoresAsync(LEADERBOARD_ID);
+        // Fetching the leaderboard data with metadata included
+        var response = await LeaderboardsService.Instance.GetScoresAsync(LEADERBOARD_ID, new GetScoresOptions { IncludeMetadata = true });
         List<TherapistData> therapists = new List<TherapistData>();
 
         foreach (var entry in response.Results)
         {
-            Debug.Log($"Processing entry: PlayerID={entry.PlayerId}, Score={entry.Score}");
-            Debug.Log($"Raw Metadata from Leaderboard: {JsonConvert.SerializeObject(entry.Metadata)}");
+            Debug.Log($"Processing entry: PlayerID={entry.PlayerId}, MetaData={entry.Metadata}, Score={entry.Score}");
+            Debug.Log($"The type of entry is: {entry.GetType()}");
+
+            Debug.Log($"Raw Metadata from Leaderboard: {entry.Metadata}");
+            Debug.Log($"Raw Metadata from Leaderboard (Serialized): {JsonConvert.SerializeObject(entry.Metadata)}");
 
             string name = "Unknown";
             string specialization = "Unknown";
@@ -61,33 +65,28 @@ public class TherapistLeaderboardManager : MonoBehaviour
             // Ensure metadata exists
             if (entry.Metadata != null)
             {
-                Debug.Log($"Metadata Type: {entry.Metadata.GetType()}");
-                //foreach (var kvp in entry.Metadata)
-                //{
-                //    Debug.Log($"Metadata Key: {kvp.Key}, Value: {kvp.Value}");
-                //}
+                try
+                {
+                    JObject metadata = JObject.Parse(entry.Metadata.ToString());
 
-                //if (entry.Metadata.TryGetValue("data", out string metadataJson))
-                //{
-                //    try
-                //    {
-                //        var metadata = JsonConvert.DeserializeObject<Dictionary<string, string>>(metadataJson) ?? new Dictionary<string, string>();
-                //        name = metadata.TryGetValue("Name", out var extractedName) ? extractedName : "Unknown";
-                //        specialization = metadata.TryGetValue("Specialization", out var extractedSpecialization) ? extractedSpecialization : "Unknown";
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Debug.LogError($"Error deserializing metadata: {ex.Message}");
-                //    }
-                //}
+                    // Extract values from the JObject
+                    name = metadata["Name"]?.ToString() ?? "Unknown";
+                    specialization = metadata["Specialization"]?.ToString() ?? "Unknown";
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error deserializing metadata: {ex.Message}");
+                }
             }
 
-
+            // Add therapist data to the list
             therapists.Add(new TherapistData(name, specialization, (int)entry.Score, entry.PlayerId));
         }
 
         return therapists;
     }
+
 
     private void DisplayTherapists(List<TherapistData> therapists)
     {
@@ -148,16 +147,16 @@ public class TherapistLeaderboardManager : MonoBehaviour
     }
 
     private async Task<string> GetSelectedTherapistID()
-{
-    var response = await CloudSaveService.Instance.Data.Player.LoadAsync(
-        new HashSet<string> { "TherapistID" }
-    );
-    if (response.TryGetValue("TherapistID", out var therapistID))
     {
-        return therapistID.ToString();
+        var response = await CloudSaveService.Instance.Data.Player.LoadAsync(
+            new HashSet<string> { "TherapistID" }
+        );
+        if (response.TryGetValue("TherapistID", out var therapistID))
+        {
+            return therapistID.ToString();
+        }
+        return null;
     }
-    return null;
-}
 
 
     private async void SaveTherapistForPatient(string therapistPlayerID)

@@ -275,7 +275,7 @@ public class PatientProfileCreationController : MonoBehaviour
 
     bool ValidateName(string name) => Regex.IsMatch(name, "^[a-zA-Z ]+$");
 
-    bool ValidateContactNumber(string number) => Regex.IsMatch(number, @"^\d{10,15}$");
+    bool ValidateContactNumber(string number) => Regex.IsMatch(number, @"^0\d{9}$");
 
     bool ValidateEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 }
