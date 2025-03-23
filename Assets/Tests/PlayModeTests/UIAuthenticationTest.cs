@@ -13,13 +13,21 @@ public class UIAuthenticationTest : MonoBehaviour
     /// Test if the splash screen automatically transitions to the Sign-In scene after 3 seconds.
     /// </summary>
     /// 
+<<<<<<< Updated upstream
     
+=======
+    // 
+>>>>>>> Stashed changes
     [UnityTest]
     public IEnumerator SplashScreenToSignInPageNaigationTest()
     {
         // Load SplashScreen
         SceneManager.LoadScene("SplashScreen");
+<<<<<<< Updated upstream
         yield return new WaitForSeconds(5f); 
+=======
+        yield return new WaitForSeconds(5f);
+>>>>>>> Stashed changes
 
         // Verify that Sign-In scene is loaded
         Assert.AreEqual("SignInPage", SceneManager.GetActiveScene().name);

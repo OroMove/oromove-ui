@@ -18539,6 +18539,7 @@ GameObject:
   - component: {fileID: 575284228}
   - component: {fileID: 575284227}
   - component: {fileID: 575284226}
+  - component: {fileID: 575284230}
   m_Layer: 5
   m_Name: BackArrowButton
   m_TagString: Untagged
@@ -18589,7 +18590,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 575284227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 575284230}
+        m_TargetAssemblyTypeName: ButtonNavigation, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &575284227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18648,6 +18661,19 @@ RectTransform:
   m_AnchoredPosition: {x: -361.33, y: 866.19}
   m_SizeDelta: {x: 78, y: 78}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &575284230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575284225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007bed2f70819f447a9be3be04f515df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: SignUpPage
 --- !u!1 &584125773
 GameObject:
   m_ObjectHideFlags: 0

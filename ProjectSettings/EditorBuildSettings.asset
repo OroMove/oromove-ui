@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< Updated upstream
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+=======
+>>>>>>> Stashed changes
   - enabled: 1
     path: Assets/Scenes/App_Pages/SplashScreen.unity
     guid: f000fd2f6a6349d4b94b5c6f3f99295b
@@ -30,38 +33,89 @@ EditorBuildSettings:
     path: Assets/Scenes/App_Pages/HC - Level 6.unity
     guid: b9457b0dff201a14b9eac32e5feab293
   - enabled: 1
-    path: Assets/Scenes/App_Pages/SignInPage.unity
-    guid: c5cd445a4c4094a4d8debdd9f036861c
+    path: Assets/Scenes/App_Pages/GameLibPage.unity
+    guid: 39bff18ac4f1d244bbd0c9d6a0772e58
   - enabled: 1
     path: Assets/Scenes/App_Pages/PatientHomePage.unity
     guid: 626b1c9e6912f4a42894e575bcfbc172
   - enabled: 1
-    path: Assets/Scenes/App_Pages/GameLibPage.unity
-    guid: 39bff18ac4f1d244bbd0c9d6a0772e58
+    path: Assets/Scenes/App_Pages/HillClimberGameMenu.unity
+    guid: 115dabe35aae28544a7b234bbba2ad6a
   - enabled: 1
     path: Assets/Scenes/App_Pages/HillClimberPage.unity
     guid: 81dfdc41cf27bd743953c0650619636c
+<<<<<<< Updated upstream
+=======
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/ListofTherapistsPage.unity
+    guid: 80897984f5bcda641875649d2af1a6e2
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_Level_01.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_Level_02.unity
+    guid: 83477510895f943448189db16a87978a
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_Level_03.unity
+    guid: 4a403d3196e5b12419e19304936eb93d
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_Level_04.unity
+    guid: 5b575c0e88f83914fa666941f0eedd9d
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_Level_05.unity
+    guid: 4dc7d5412e26e584289d57fc092d4160
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_Level_06.unity
+    guid: d0b1c184cc7f9484791c78f7713ba414
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_LevelSelection.unity
+    guid: 100ea67bc3e80ee49a0b7fb4c92f0247
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/OD_MainMenu.unity
+    guid: c626ac84297fbd44884103e3697e4e31
+>>>>>>> Stashed changes
   - enabled: 1
     path: Assets/Scenes/App_Pages/OroDodgePage.unity
     guid: bdaa6fe28b56e9e4ab8c22ed1df7b93d
   - enabled: 1
-    path: Assets/Scenes/App_Pages/ResetPasswordPage.unity
-    guid: d0250ada8e6e7364f984d0ec0a0c0ec9
-  - enabled: 1
-    path: Assets/Scenes/App_Pages/WhoAreYouPage.unity
-    guid: 4b2a2f43915a7d44d97b9e8ee769670c
-  - enabled: 1
-    path: Assets/Scenes/App_Pages/SignUpPage.unity
-    guid: c1b8cc3fb037aaf41a5d39d1d3fff8e0
-  - enabled: 1
-    path: Assets/Scenes/App_Pages/TherapistProfileCreationPage.unity
-    guid: 4fc93f508e5953a45ac8bd1265c5f633
+    path: Assets/Scenes/App_Pages/OroTwisterPage.unity
+    guid: afb4b3898e092fd4c9363992f7f82f65
   - enabled: 1
     path: Assets/Scenes/App_Pages/PatientProfileCreationPage.unity
     guid: 042cc6a4ec2de104895bd9843bcdcd4d
   - enabled: 1
-    path: Assets/Scenes/App_Pages/HillClimberGameMenu.unity
-    guid: 115dabe35aae28544a7b234bbba2ad6a
+    path: Assets/Scenes/App_Pages/PatientSettingsPage.unity
+    guid: a468b5ef39674034b987765caa99b927
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/ProgressDashboard.unity
+    guid: 3a29eeca434a7554d97acae49db0598f
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/ResetPasswordPage.unity
+    guid: d0250ada8e6e7364f984d0ec0a0c0ec9
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/SignInPage.unity
+    guid: c5cd445a4c4094a4d8debdd9f036861c
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/SignUpPage.unity
+    guid: c1b8cc3fb037aaf41a5d39d1d3fff8e0
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistEditProfilePage.unity
+    guid: 3e753fa117610464781016e20c205e8a
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistHomePage.unity
+    guid: e5881543e8dabb543b770efcaf342529
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistProfileCreationPage.unity
+    guid: 4fc93f508e5953a45ac8bd1265c5f633
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistSettings.unity
+    guid: 6819a3177c2d4f742948040e288bc98a
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistUserProfile.unity
+    guid: 30d7177dcd750ab45be0ffa697c0e13e
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/WhoAreYouPage.unity
+    guid: 4b2a2f43915a7d44d97b9e8ee769670c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
