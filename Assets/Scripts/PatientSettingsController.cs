@@ -14,16 +14,10 @@ public class PatientSettingsController : MonoBehaviour
     private void Start()
     {
         // Assign button click events
-        backButton.onClick.AddListener(GoToHomePage);
+        backButton.onClick.AddListener(OnBackButtonClicked);
         editProfileButton.onClick.AddListener(GoToEditProfilePage);
         connectTherapistButton.onClick.AddListener(GoToConnectToTherapistPage);
         logOutButton.onClick.AddListener(Logout);
-    }
-
-    // Function to go back to Home Page
-    private void GoToHomePage()
-    {
-        SceneManager.LoadScene("PatientHomePage");
     }
 
     // Function to go to Edit Profile Page
@@ -36,6 +30,11 @@ public class PatientSettingsController : MonoBehaviour
     private void GoToConnectToTherapistPage()
     {
         SceneManager.LoadScene("ListofTherapistsPage");
+    }
+
+    void OnBackButtonClicked()
+    {
+        SceneManager.LoadScene("PatientHomePage");
     }
 
     // Function to handle logout
