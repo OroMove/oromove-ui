@@ -1,65 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mediapipe.Unity.Sample.FaceLandmarkDetection; // Import the namespace
+using Mediapipe.Unity.Sample.FaceLandmarkDetection; // Import the FaceLandmarkDetection namespace from Mediapipe
 
 public class Player : MonoBehaviour
 {
+    // Speed at which the player moves
     public float moveSpeed;
-    private Rigidbody2D rb;
-    private ODGameManager gameManager;
-    private string lipPosition = "CENTER"; // Default value is "CENTER"
-    private bool hasWon = false; // Track if player has won
 
-    // Sprite references for different player states
+    // Rigidbody2D component for physics-based movement
+    private Rigidbody2D rb;
+
+    // Reference to the game manager that controls game logic
+    private ODGameManager gameManager;
+
+    // Default lip position (CENTER by default)
+    private string lipPosition = "CENTER";
+
+    // Flag to track if the player has won the game
+    private bool hasWon = false;
+
+    // Sprite references for different player states (e.g., skating, relaxing, victory, sad)
     public Sprite skatingLeftSprite;
     public Sprite skatingRightSprite;
     public Sprite relaxingSprite;
     public Sprite victorySprite;
     public Sprite sadSprite;
 
-    private SpriteRenderer spriteRenderer; // To change the sprite of the player
+    // SpriteRenderer to modify the player's sprite based on their state
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        // Initializing components
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
-        gameManager = FindObjectOfType<ODGameManager>(); // Get GameManager reference
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get SpriteRenderer component attached to the player
+        gameManager = FindObjectOfType<ODGameManager>(); // Find the GameManager object in the scene
 
+        // Check if GameManager exists, otherwise log an error
         if (gameManager == null)
         {
-            Debug.LogError("GameManager not found!");
+            Debug.LogError("GameManager not found! Ensure the game manager is present in the scene.");
         }
 
-        // Subscribe to FaceLandmarkerRunner event
+        // Subscribe to the event for face landmark updates (lip position changes)
         FaceLandmarkerRunnerLip.OnLipPositionChanged += UpdateLipPosition;
     }
 
     void Update()
     {
+        // If GameManager is not set or the player has already won, skip further updates
         if (gameManager == null || hasWon) return;
 
-        // Check if the game is over, if so stop movement and set sad sprite
+        // If the game is over, stop movement and set a sad sprite
         if (gameManager.IsGameOver)
         {
-            rb.linearVelocity = Vector2.zero; // Stop movement if game is over
-            spriteRenderer.sprite = sadSprite; // Set sprite to sad when the player loses
+            StopPlayer(); // Stop player movement immediately
+            spriteRenderer.sprite = sadSprite; // Change sprite to sad
             return;
         }
 
-        // Check if the game has started, if so start moving the player
+        // If the game has started, update the player's movement
         if (gameManager.IsGameStarted)
         {
             MovePlayer();
         }
     }
 
+    // Method to control the player's movement based on lip position
     private void MovePlayer()
     {
-        // Debugging logs to check the current lip position and if the player is moving
-        Debug.Log("Lip Position: " + lipPosition); // Debug log to check lip position
+        // Debugging output to track the current lip position
+        Debug.Log("Lip Position: " + lipPosition);
 
-        // Update sprite and movement based on lip position
+        // Move the player based on lip position
         if (lipPosition == "LEFT")
         {
             rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y); // Move left
@@ -72,44 +86,64 @@ public class Player : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = Vector2.zero; // Stop movement when lips are centered
+            StopPlayer(); // Stop player if lips are centered
             spriteRenderer.sprite = relaxingSprite; // Change sprite to relaxing
         }
     }
 
+    // Event handler for updating lip position when it's changed by the FaceLandmarker
     private void UpdateLipPosition(string newPosition)
     {
-        if (hasWon) return; // Prevent updating movement if the player has won
+        // Skip updating if the player has already won
+        if (hasWon) return;
 
-        Debug.Log("Lip Position Changed: " + newPosition); // Debug log to track lip position changes
-        lipPosition = newPosition; // Update lip position when the event is triggered
+        // Check if the lip position has changed
+        if (lipPosition != newPosition)
+        {
+            Debug.Log("Lip Position Changed: " + newPosition); // Log the new lip position for debugging
+            lipPosition = newPosition; // Update the lip position
+        }
     }
 
+    // Method to stop player movement (used when game is over or player is idle)
+    private void StopPlayer()
+    {
+        rb.linearVelocity = Vector2.zero; // Stop player movement by setting velocity to zero
+    }
+
+    // Ensure to unsubscribe from the event when the object is destroyed to prevent memory leaks
     private void OnDestroy()
     {
-        // Unsubscribe from the event when the object is destroyed
-        FaceLandmarkerRunnerLip.OnLipPositionChanged -= UpdateLipPosition;
+        FaceLandmarkerRunnerLip.OnLipPositionChanged -= UpdateLipPosition; // Unsubscribe from the event
     }
 
+    // Also unsubscribe from the event when the object is disabled (important if object is reused)
+    private void OnDisable()
+    {
+        FaceLandmarkerRunnerLip.OnLipPositionChanged -= UpdateLipPosition; // Unsubscribe to avoid any unintended behavior
+    }
+
+    // Handle collision events (e.g., when the player collides with a "Block" object)
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Handle collision with a "Block"
+        // Check if the player collided with an object tagged as "Block"
         if (collision.gameObject.CompareTag("Block"))
         {
+            // If the game manager exists and the player hasn't already won, call GameOver()
             if (gameManager != null && !hasWon)
             {
-                gameManager.GameOver(); // Call GameOver() in the GameManager
-                spriteRenderer.sprite = sadSprite; // Set sprite to sad when player loses
+                gameManager.GameOver(); // Trigger game over logic
+                spriteRenderer.sprite = sadSprite; // Set the sprite to sad when the player loses
             }
         }
     }
 
-    // Call this function to set the victory sprite when the player wins
+    // Call this method when the player wins the game
     public void WinGame()
     {
-        hasWon = true; // Mark player as having won
-        rb.linearVelocity = Vector2.zero; // Use 'velocity' instead of 'linearVelocity'
-        spriteRenderer.sprite = victorySprite; // Set sprite to victory
-        Debug.Log("Player has won! Victory sprite set.");
+        hasWon = true; // Mark the player as having won
+        rb.linearVelocity = Vector2.zero; // Stop movement by setting velocity to zero
+        spriteRenderer.sprite = victorySprite; // Set the victory sprite
+        Debug.Log("Player has won! Victory sprite set."); // Log the win event for debugging
     }
 }
