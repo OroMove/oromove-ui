@@ -245,7 +245,7 @@ public class Graph : MonoBehaviour
             lineRectTransform.anchoredPosition = new Vector2(xPosition, yPosition);
 
             // Adjust the size of the line element
-            float width = 30f;
+            float width = 40f;
             lineRectTransform.sizeDelta = new Vector2(width, lineRectTransform.sizeDelta.y);
         }
     }
