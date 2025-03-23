@@ -81,8 +81,26 @@ EditorBuildSettings:
     path: Assets/Scenes/App_Pages/PatientProfileCreationPage.unity
     guid: 042cc6a4ec2de104895bd9843bcdcd4d
   - enabled: 1
+    path: Assets/Scenes/App_Pages/ProgressDashboard.unity
+    guid: 3a29eeca434a7554d97acae49db0598f
+  - enabled: 1
     path: Assets/Scenes/App_Pages/HillClimberGameMenu.unity
     guid: 115dabe35aae28544a7b234bbba2ad6a
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/PatientSettingsPage.unity
+    guid: a468b5ef39674034b987765caa99b927
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistSettings.unity
+    guid: 6819a3177c2d4f742948040e288bc98a
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/PatientEditProfilePage.unity
+    guid: 39672eb5b1474554ea0e49b18f648082
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/TherapistEditProfilePage.unity
+    guid: 3e753fa117610464781016e20c205e8a
+  - enabled: 1
+    path: Assets/Scenes/App_Pages/ListofTherapistsPage.unity
+    guid: 80897984f5bcda641875649d2af1a6e2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
