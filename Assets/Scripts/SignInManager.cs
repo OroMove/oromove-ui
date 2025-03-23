@@ -13,6 +13,8 @@ public enum SignInError
 {
     WrongUsernamePassword,
     AccountNotFound,
+    AccountAlreadyLinked,
+    AccountLinkLimitExceeded,
     ConnectionError,
     UnexpectedError
 }
@@ -99,7 +101,15 @@ public class SignInController : MonoBehaviour
         {
             Debug.LogError("Request Failed: " + ex.Message);
 
-            if (ex.Message.Contains("WRONG_USERNAME_PASSWORD"))
+            if (ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
+            {
+                HandleSignInError(SignInError.AccountAlreadyLinked);
+            }
+            else if (ex.ErrorCode == AuthenticationErrorCodes.AccountLinkLimitExceeded)
+            {
+                HandleSignInError(SignInError.AccountLinkLimitExceeded);
+            }
+            else if (ex.Message.Contains("WRONG_USERNAME_PASSWORD"))
             {
                 HandleSignInError(SignInError.WrongUsernamePassword);
             }
@@ -112,7 +122,6 @@ public class SignInController : MonoBehaviour
                 HandleSignInError(SignInError.ConnectionError);
             }
         }
-
         catch (System.Exception ex)
         {
             Debug.LogError("Unexpected Error: " + ex.Message);

@@ -219,9 +219,9 @@ public class TherapistProfileCreationController : MonoBehaviour
             return false;
         }
 
-        if (!Regex.IsMatch(contactNumber, @"^\d{10,15}$"))
+        if (!Regex.IsMatch(contactNumber, @"^0\d{9}$"))
         {
-            errorText.text = "Invalid Contact Number. It should be 10-15 digits long.";
+            errorText.text = "Invalid Contact Number. It should start with 0 and be exactly 10 digits long.";
             return false;
         }
 
