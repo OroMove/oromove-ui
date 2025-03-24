@@ -51,19 +51,9 @@ public class GameManager : MonoBehaviour
     public Text coinCounterText;
     public Text distanceText;
     public Text highestDistanceText;
-    //public Text finalDistanceText;
+    public Text finalDistanceText;
     public Text finalSpeedText;
     public Text finalTimeText;
-
-
-    
-    public Text maxDistance;
-    public Text maxSpeed;
-
-
-    public Text gameOverTime;
-    public Text gameOverMouthDistance;
-
 
     public int totalCoins;
     public Transform playerTransform;
@@ -84,7 +74,6 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Current scene level index: {currentLevel}");
 
         startingPosition = playerTransform.position;
-        Time.timeScale = 1f;
         startTime = Time.time;
 
         // Load existing progress before initializing new data
@@ -397,65 +386,18 @@ public class GameManager : MonoBehaviour
         if (!levelCompletePanel.activeSelf && !gameOverScreen.activeSelf)
         {
             Debug.Log("[LevelComplete] Displaying level complete screen");
-
-            // Get the current level's progress
-            LevelProgress progress = GetLatestLevelProgress();
-
-            if (progress == null || progress.attempts.Count == 0)
-            {
-                Debug.LogWarning("[LevelComplete] No attempts found.");
-                return;
-            }
-
-            // Get the last 3 attempts (or fewer if less than 3)
-            int attemptsCount = progress.attempts.Count;
-            int startIdx = Mathf.Max(0, attemptsCount - 3); // Get last 3 attempts safely
-
-            string timeText = "";
-            string speedText = "";
-            string distanceText = "";
-
-            for (int i = startIdx; i < attemptsCount; i++)
-            {
-                var attempt = progress.attempts[i];
-
-                timeText += $"Attempt {i + 1}: {attempt.timeTaken:F2}s\n";
-                speedText += $"Attempt {i + 1}: {attempt.maxSpeed:F2}m/s\n";
-                distanceText += $"Attempt {i + 1}: {attempt.maxMouthOpening:F2}m\n";
-            }
-
-            // Update UI text
-            finalTimeText.text = timeText;
-            maxSpeed.text = speedText;
-            maxDistance.text = distanceText;
-
-            Debug.Log("[ShowLevelCompletionUI] Updated UI with last 3 attempts.");
             levelCompletePanel.SetActive(true);
-            Time.timeScale = 0f; // Pause game
 
             UpdateFinalStats();
             UpdateLevelProgress();
         }
     }
 
-
-    private LevelProgress GetLatestLevelProgress()
-    {
-        if (levelProgressData.Count == 0)
-        {
-            Debug.LogWarning("[GetLatestLevelProgress] No level progress data found.");
-            return null;
-        }
-
-        return levelProgressData.Values.Last(); // Get the last level's progress
-    }
-
-
     private void UpdateFinalStats()
     {
         float elapsedTime = Time.time - startTime;
-        //finalDistanceText.text = $"Distance: {currentDistance:F0} m";
-        highestDistanceText.text = $"{highestDistance:F0} m";
+        finalDistanceText.text = $"Distance: {currentDistance:F0} m";
+        highestDistanceText.text = $"Highest Distance: {highestDistance:F0} m";
         finalSpeedText.text = $"Speed: {currentDistance / elapsedTime:F2} m/s";
         finalTimeText.text = $"Time: {elapsedTime:F2} s";
     }

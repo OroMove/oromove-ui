@@ -1313,7 +1313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.57000005}
   m_AnchorMax: {x: 0.5, y: 0.57000005}
-  m_AnchoredPosition: {x: 1.6, y: -48.6}
+  m_AnchoredPosition: {x: 1.6, y: -52.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625820516
@@ -1384,7 +1384,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< Updated upstream
   m_Children:
   - {fileID: 976731707}
   m_Father: {fileID: 212253384}
@@ -1393,15 +1392,6 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5937501}
   m_AnchoredPosition: {x: 104.1, y: 60.8}
   m_SizeDelta: {x: 18.4222, y: -2.80501}
-=======
-  m_Children: []
-  m_Father: {fileID: 1328831254}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
->>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630221915
 MonoBehaviour:
@@ -2785,7 +2775,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1213823684}
-  - {fileID: 638712882}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4007,24 +3996,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035399371}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
 --- !u!1 &2035562808
-=======
---- !u!114 &2035399376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035399371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 007bed2f70819f447a9be3be04f515df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: ProgressDashboard
---- !u!1 &2089494926
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4032,15 +4004,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 2035562809}
   - component: {fileID: 2035562811}
   - component: {fileID: 2035562810}
-=======
-  - component: {fileID: 2089494927}
-  - component: {fileID: 2089494929}
-  - component: {fileID: 2089494928}
->>>>>>> Stashed changes
   m_Layer: 5
   m_Name: Welcome
   m_TagString: Untagged
@@ -4360,7 +4326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b5ee04c50fb56946b640cc9b3f51fbf, type: 3}
+  m_Sprite: {fileID: -4885258564510097670, guid: 2aa938c6765d9d84e8b1337e379443c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
