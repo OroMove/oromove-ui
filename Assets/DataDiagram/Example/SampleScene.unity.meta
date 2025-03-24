@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72aad287179d49447b11b9768ee16ec8
+timeCreated: 1509098403
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 108651
+  packageName: Dynamic Line Chart
+  packageVersion: 1.0
+  assetPath: Assets/DataDiagram/Example/SampleScene.unity
+  uploadId: 222551
