@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 445081198}
   - component: {fileID: 445081197}
   m_Layer: 5
-  m_Name: Home (3)
+  m_Name: Setting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1468,11 +1468,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1538407571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 540, y: 960}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &632793932
@@ -2347,7 +2347,7 @@ GameObject:
   - component: {fileID: 927212504}
   - component: {fileID: 927212503}
   m_Layer: 5
-  m_Name: Home (1)
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2645,7 +2645,7 @@ GameObject:
   - component: {fileID: 1215292766}
   - component: {fileID: 1215292765}
   m_Layer: 5
-  m_Name: Home (2)
+  m_Name: Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2780,7 +2780,7 @@ RectTransform:
   m_GameObject: {fileID: 1215855335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.7799897, y: 1.26888, z: 0.86564}
+  m_LocalScale: {x: 8.54472, y: 1.393605, z: 0.95072997}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1407746092}
@@ -2791,7 +2791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.57000005}
   m_AnchorMax: {x: 0.5, y: 0.57000005}
-  m_AnchoredPosition: {x: 4, y: -1014}
+  m_AnchoredPosition: {x: 28, y: -991.03}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1215855337
@@ -3521,6 +3521,7 @@ RectTransform:
   - {fileID: 1674435895}
   - {fileID: 1753679298}
   - {fileID: 325784042}
+  - {fileID: 630025997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4640,5 +4641,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1477447371}
   - {fileID: 1538407571}
-  - {fileID: 630025997}
   - {fileID: 28804521}

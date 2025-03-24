@@ -1945,6 +1945,7 @@ GameObject:
   - component: {fileID: 1552208427}
   - component: {fileID: 1552208426}
   - component: {fileID: 1552208425}
+  - component: {fileID: 1552208428}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2054,6 +2055,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552208423}
   m_CullTransparentMesh: 1
+--- !u!114 &1552208428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552208423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007bed2f70819f447a9be3be04f515df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: PatientSettingsPage
 --- !u!1 &1556684623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1656246337}
-  - component: {fileID: 1656246338}
+  - component: {fileID: 1656246339}
   m_Layer: 5
   m_Name: NavbarManager
   m_TagString: Untagged
@@ -2180,7 +2194,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1656246338
+--- !u!114 &1656246339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2189,7 +2203,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656246336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e298594db4f5643b9be140eb2253c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 90a91679e3f409b468866ac5d76fb795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   homeButton: {fileID: 2005538749}
