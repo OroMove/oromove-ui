@@ -9,7 +9,6 @@ using Unity.Services.Core;
 using Unity.Services.CloudSave;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine.InputSystem;
 
 public class SignUpManager : MonoBehaviour
 {
@@ -38,8 +37,8 @@ public class SignUpManager : MonoBehaviour
         signInButton.onClick.AddListener(GoToSignIn);
 
         // Back Buttons
-        backToEmailButton.onClick.AddListener(() => PreviousStep(0));  //Password Panel
-        backToPasswordButton.onClick.AddListener(() => PreviousStep(1));  //Email Panel
+        backToEmailButton.onClick.AddListener(() => PreviousStep(0));  // Confirm Password ? Password Panel
+        backToPasswordButton.onClick.AddListener(() => PreviousStep(1));  // Password ? Email Panel
         backToRoleButton.onClick.AddListener(GoBackToWhoAreYou);
     }
 
@@ -53,7 +52,7 @@ public class SignUpManager : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             if (currentStep == 0) NextStep(0);
             else if (currentStep == 1) NextStep(1);
@@ -67,6 +66,11 @@ public class SignUpManager : MonoBehaviour
         emailPanel.SetActive(step == 0);
         passwordPanel.SetActive(step == 1);
         confirmPasswordPanel.SetActive(step == 2);
+
+        //// Activate corresponding back buttons
+        //backToEmailButton.gameObject.SetActive(step == 2);  // Show only in Confirm Password panel
+        //backToPasswordButton.gameObject.SetActive(step == 1);  // Show only in Password panel
+        //backToRoleButton.gameObject.SetActive(step == 0);  // Show only in Email panel
 
         // Automatically focus on the correct input field
         if (step == 0) EventSystem.current.SetSelectedGameObject(emailInput.gameObject);
@@ -87,9 +91,9 @@ public class SignUpManager : MonoBehaviour
         }
         else if (step == 1) // Password validation
         {
-            if (!IsValidPassword(passwordInput.text))
+            if (passwordInput.text.Length < 6)
             {
-                passwordErrorText.text = "Password must be 8-30 characters with at least 1 uppercase, 1 lowercase, 1 digit, and 1 symbol!";
+                passwordErrorText.text = "Password must be at least 6 characters!";
                 return;
             }
             passwordErrorText.text = "";
@@ -135,38 +139,7 @@ public class SignUpManager : MonoBehaviour
         }
         catch (AuthenticationException ex)
         {
-            // Handle authentication-specific errors
-            if (ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
-            {
-                emailErrorText.text = "This account already existsS.";
-            }
-            else if (ex.ErrorCode == AuthenticationErrorCodes.InvalidParameters)
-            {
-                emailErrorText.text = "Invalid input parameters. Please check your email and password.";
-            }
-            else
-            {
-                emailErrorText.text = "Authentication failed. Please try again later.";
-            }
-
-            Debug.LogException(ex);
-        }
-        catch (RequestFailedException ex)
-        {
-            // Handle general request failed errors
-            emailErrorText.text = "Request failed. Please check your connection and try again.";
-
-            // Optionally, you can check for specific error codes in the RequestFailedException
-            if (ex.ErrorCode == AuthenticationErrorCodes.InvalidSessionToken)
-            {
-                emailErrorText.text = "Session expired. Please log in again.";
-            }
-            else if (ex.ErrorCode == AuthenticationErrorCodes.ClientNoActiveSession)
-            {
-                emailErrorText.text = "No active session found. Please log in first.";
-            }
-
-            Debug.LogException(ex);
+            Debug.LogError("Sign Up Failed: " + ex.Message);
         }
     }
 
@@ -202,11 +175,4 @@ public class SignUpManager : MonoBehaviour
         string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         return Regex.IsMatch(email, emailPattern);
     }
-
-    bool IsValidPassword(string password)
-    {
-        string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$";
-        return Regex.IsMatch(password, passwordPattern);
-    }
-
 }
