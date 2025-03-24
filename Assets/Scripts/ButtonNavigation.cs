@@ -1,19 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonNavigation : MonoBehaviour
 {
-    [SerializeField] private string targetScene;
-
-    public void LoadScene()
+    // This method will be called by each button when clicked
+    public void LoadScene(string sceneName)
     {
-        if (!string.IsNullOrEmpty(targetScene))
-        {
-            SceneManager.LoadScene(targetScene);
-        }
-        else
-        {
-            Debug.LogWarning("Target scene is not set!");
-        }
+        // Load the scene by its name
+        SceneManager.LoadScene(sceneName);
     }
 }
